@@ -1,7 +1,7 @@
-package uzh.soco.group27.game;
+package uzh.soco.group27.ex2.game;
 
-import uzh.soco.group27.dice.Dice;
-import uzh.soco.group27.dice.DiceComp;
+import uzh.soco.group27.ex2.dice.Dice;
+import uzh.soco.group27.ex2.dice.DiceComp;
 
 import java.util.List;
 

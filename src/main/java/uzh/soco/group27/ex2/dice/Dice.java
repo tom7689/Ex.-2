@@ -1,4 +1,4 @@
-package uzh.soco.group27.dice;
+package uzh.soco.group27.ex2.dice;
 
 import java.util.Random;
 

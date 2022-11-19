@@ -1,6 +1,6 @@
-package uzh.soco.group27.game;
+package uzh.soco.group27.ex2.game;
 
-import uzh.soco.group27.dice.DiceRoll;
+import uzh.soco.group27.ex2.dice.DiceRoll;
 
 import java.util.ArrayList;
 import java.util.List;
