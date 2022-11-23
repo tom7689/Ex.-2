@@ -52,6 +52,16 @@ public class Input {
 
         return aIndex;
     }
-
+    public boolean toContinue() {
+        while (true) {
+            System.out.println("Press (R)oll or (E)nd your turn");
+            String aLine = aInput.nextLine();
+            if (aLine.equals("R")) {
+                return true;
+            } else if (aLine.equals("E")) {
+                return false;
+            }
+        }
+    }
 }
 
