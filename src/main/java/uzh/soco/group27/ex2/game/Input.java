@@ -1,6 +1,6 @@
 package uzh.soco.group27.ex2.game;
 
-import uzh.soco.group27.ex2.dice.DiceRoll;
+import uzh.soco.group27.ex2.dice.DiceComp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class Input {
     private final Scanner aInput = new Scanner(System.in);
 
-    public void selectDices(DiceRoll pDiceComp) {
+    public void selectDices(DiceComp pDiceComp) {
         List<Integer> indices = new ArrayList<>(6);
         System.out.println("Enter dices (separated by comma) to select: ");
         while (true) {
@@ -52,6 +52,7 @@ public class Input {
 
         return aIndex;
     }
+
     public boolean toContinue() {
         while (true) {
             System.out.println("Press (R)oll or (E)nd your turn");

@@ -10,7 +10,6 @@ public class Game {
         while (true) {
             if (in.toContinue()) {
                 diceComp.roll();
-
                 if (diceComp.isNull()) {
                     System.out.println("You rolled a Null");
                     return;

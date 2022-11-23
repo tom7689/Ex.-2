@@ -1,9 +1,8 @@
 package uzh.soco.group27.ex2.dice;
 
-import java.util.List;
 import java.util.Random;
 
-public class Dice implements DiceRoll{
+public class Dice {
     private static final DiceComp DICES = new DiceComp();
 
     static
@@ -26,20 +25,6 @@ public class Dice implements DiceRoll{
     }
     public int getPoints() {
         return aNumber;
-    }
-    @Override
-    public void add(Dice pDice) {
-    }
-
-    @Override
-    public int getLength() {
-        return 1;
-    }
-
-
-    @Override
-    public boolean split(List<Integer> pDices) {
-        return false;
     }
 
     private void getResults() {

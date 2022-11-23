@@ -3,7 +3,7 @@ package uzh.soco.group27.ex2.dice;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DiceComp implements DiceRoll {
+public class DiceComp{
     private final List<Dice> aDices;
     private final List<Dice> selectedDices;
     private final List<DiceComp> rolledDices;
@@ -15,12 +15,12 @@ public class DiceComp implements DiceRoll {
         selectedDices = new ArrayList<>(6);
         rolledDices = new ArrayList<>(6);
         tempDices = new ArrayList<>(6);
-
     }
     public void roll() {
         for (Dice dice : aDices) {
             dice.roll();
         }
+        System.out.print("\n");
     }
     private int getResults() {
         int aPoints = 0;
@@ -62,14 +62,11 @@ public class DiceComp implements DiceRoll {
     public void add(Dice pDice) {
         aDices.add(pDice);
     }
-    @Override
+
     public boolean split(List<Integer> pIndices) {
-        testPoints(aDices);
+        tempDices.clear();
         for (int index : pIndices) {
-            if (rolledDices.get(0).getaDices().contains(aDices.get(index)) ||
-                    rolledDices.get(4).getaDices().contains(aDices.get(index)) ||
-                    rolledDices.get(6).getaDices().contains(aDices.get(index)) ||
-                    rolledDices.get(7).getaDices().contains(aDices.get(index))) {
+            if (hasPoints(aDices.get(index)) && !tempDices.contains(aDices.get(index))) {
                 tempDices.add(aDices.get(index));
             } else return false;
         }
@@ -79,17 +76,12 @@ public class DiceComp implements DiceRoll {
                 aDices.remove(dice);
             }
             points += getResults();
-            tempDices.clear();
             return true;
         }
         assert false;
         return false;
     }
 
-    /**
-     *
-     * @pre aDices to be rolled.
-     */
     public boolean isNull() {
         if (aDices.get(0).getPoints() != 0) {
             return !testPoints(aDices);
@@ -98,10 +90,21 @@ public class DiceComp implements DiceRoll {
         }
     }
     public boolean isTutto() {
-        return selectedDices.size() == 6;
+        for (Dice aDice : aDices) {
+            if (!hasPoints(aDice)) {
+                return false;
+            }
+        }
+        getResults();
+        return true;
+    }
+    private boolean hasPoints(Dice pDice) {
+        return rolledDices.get(0).getaDices().contains(pDice) ||
+                rolledDices.get(4).getaDices().contains(pDice) ||
+                rolledDices.get(6).getaDices().contains(pDice) ||
+                rolledDices.get(7).getaDices().contains(pDice);
     }
 
-    @Override
     public int getLength() {
         return aDices.size();
     }
