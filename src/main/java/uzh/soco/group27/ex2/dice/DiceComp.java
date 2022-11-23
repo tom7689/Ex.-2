@@ -4,77 +4,114 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DiceComp implements DiceRoll {
-
-    private final List<DiceRoll> aDices;
-    private final int[] drillingValues = {1000, 200, 300, 400, 500, 600,};
-    private final int[] results = new int[6];
+    private final List<Dice> aDices;
+    private final List<Dice> selectedDices;
+    private final List<DiceComp> rolledDices;
+    private final List<Dice> tempDices;
     private int points;
 
     public DiceComp() {
-        aDices = new ArrayList<>();
-        for (int i : results) {
-            results[i] = 0;
-        }
+        aDices = new ArrayList<>(6);
+        selectedDices = new ArrayList<>(6);
+        rolledDices = new ArrayList<>(6);
+        tempDices = new ArrayList<>(6);
+
     }
     public void roll() {
-        for (DiceRoll dice : aDices) {
+        for (Dice dice : aDices) {
             dice.roll();
-            results[dice.getPoints() - 1] += 1;
         }
-        getResults();
     }
-    private void getResults() {
-        for (int i = 0; i < results.length; i++) {
-            if (results[i] >= 3) {
-                points += drillingValues[i];
-                if (results[i] == 6) {
-                    points += drillingValues[i];
-                }
+    private int getResults() {
+        int aPoints = 0;
+        aPoints += rolledDices.get(6).getPoints();
+        aPoints += rolledDices.get(7).getPoints();
+        aPoints += rolledDices.get(0).getLength() * 100;
+        aPoints += rolledDices.get(4).getLength() * 50;
+        return aPoints;
+    }
+
+    private boolean testPoints(List<Dice> pDices) {
+        rolledDices.clear();
+        for (int i = 0; i < 8; i++) {
+            rolledDices.add(new DiceComp());
+        }
+        for (Dice dice : pDices) {
+            int aNumber = dice.getPoints() - 1;
+            DiceComp aDiceComp = rolledDices.get(aNumber);
+            if (rolledDices.get(aNumber).getLength() == 0){
+                aDiceComp.add(dice);
+            } else if (rolledDices.get(aNumber).getLength() == 2){
+                aDiceComp.add(dice);
+                rolledDices.set(6, new Drilling(aDiceComp, aNumber));
+                rolledDices.set(aNumber, new DiceComp());
+            } else if (rolledDices.get(aNumber).getLength() == 5){
+                aDiceComp.add(dice);
+                rolledDices.set(7, new Drilling(aDiceComp, aNumber));
+                rolledDices.set(aNumber, new DiceComp());
+            } else {
+                aDiceComp.add(dice);
             }
         }
-        if (results[0] < 3) {
-            points += (results[0]) * 100;
-        } else if (results[0] > 3 && results[0] < 6) {
-            points += (results[0]-3) * 100;
-        }
-        if (results[4] < 3) {
-            points += (results[4]) * 50;
-        } else if (results[4] > 3 && results[4] < 6) {
-            points += (results[4]-3) * 50;
-        }
+        return getResults() > 0;
     }
+
     public int getPoints() {
         return points;
     }
-    public boolean hasPoints() {
-        getResults();
-        return getPoints() != 0;
+    public void add(Dice pDice) {
+        aDices.add(pDice);
     }
-    public DiceRoll getDice(int i) {
-        return aDices.get(i);
-    }
-    public void add(DiceRoll pDices) {
-        aDices.add(pDices);
-    }
-    public DiceComp split(List<Integer> selectedDices) {
-        DiceComp aSplit = new DiceComp();
-        for (int selDice : selectedDices) {
-            aSplit.add(aDices.get(selDice));
+    @Override
+    public boolean split(List<Integer> pIndices) {
+        testPoints(aDices);
+        for (int index : pIndices) {
+            if (rolledDices.get(0).getaDices().contains(aDices.get(index)) ||
+                    rolledDices.get(4).getaDices().contains(aDices.get(index)) ||
+                    rolledDices.get(6).getaDices().contains(aDices.get(index)) ||
+                    rolledDices.get(7).getaDices().contains(aDices.get(index))) {
+                tempDices.add(aDices.get(index));
+            } else return false;
         }
-        if (aSplit.hasPoints()) {
-            for (int selDice : selectedDices) {
-                aSplit.add(aDices.get(selDice));
-                aDices.remove(selDice);
+        if (testPoints(tempDices)) {
+            selectedDices.addAll(tempDices);
+            for (Dice dice : tempDices) {
+                aDices.remove(dice);
             }
-            return this;
-        } else return null;
+            points += getResults();
+            tempDices.clear();
+            return true;
+        }
+        assert false;
+        return false;
+    }
+
+    /**
+     *
+     * @pre aDices to be rolled.
+     */
+    public boolean isNull() {
+        if (aDices.get(0).getPoints() != 0) {
+            return !testPoints(aDices);
+        } else {
+            return false;
+        }
+    }
+    public boolean isTutto() {
+        return selectedDices.size() == 6;
+    }
+
+    @Override
+    public int getLength() {
+        return aDices.size();
+    }
+
+    protected List<Dice> getaDices() {
+        return aDices;
     }
 
     @Override
     public String toString() {
-        for (DiceRoll dr: aDices) {
-            return dr.toString();
-        }
-        return null;
+        return ""+getLength();
     }
 }

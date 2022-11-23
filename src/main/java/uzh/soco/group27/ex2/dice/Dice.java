@@ -1,5 +1,6 @@
 package uzh.soco.group27.ex2.dice;
 
+import java.util.List;
 import java.util.Random;
 
 public class Dice implements DiceRoll{
@@ -16,22 +17,33 @@ public class Dice implements DiceRoll{
     public static DiceComp getDices() {
         return DICES;
     }
-    private int aNumber;
-    private int points = 0;
+    private int aNumber = 0;
 
     public void roll() {
         aNumber = new Random().nextInt(6) + 1;
+        getResults();
         System.out.print(aNumber + " ");
     }
     public int getPoints() {
         return aNumber;
     }
     @Override
-    public void add(DiceRoll pDices) {
+    public void add(Dice pDice) {
+    }
 
+    @Override
+    public int getLength() {
+        return 1;
+    }
+
+
+    @Override
+    public boolean split(List<Integer> pDices) {
+        return false;
     }
 
     private void getResults() {
+        int points = 0;
         if (aNumber == 1) {
             points = 100;
         } else if (aNumber == 5) {
@@ -39,12 +51,7 @@ public class Dice implements DiceRoll{
         }
     }
     @Override
-    public DiceRoll getDice(int i) {
-        return this;
-    }
-
-    @Override
     public String toString() {
-        return " "+aNumber;
+        return ""+aNumber;
     }
 }

@@ -9,19 +9,20 @@ import java.util.Scanner;
 public class Input {
     private final Scanner aInput = new Scanner(System.in);
 
-    public List<Integer> selectDices(DiceRoll pDices) {
+    public void selectDices(DiceRoll pDiceComp) {
         List<Integer> indices = new ArrayList<>(6);
         System.out.println("Enter dices (separated by comma) to select: ");
         while (true) {
             String aLine = aInput.nextLine();
+            indices.clear();
             try {
-                assert aLine.length() <= 12;
+                assert aLine.length() <= pDiceComp.getLength()*2;
                 while (!aLine.isEmpty()) {
                     if (aLine.charAt(0) == ',' && aLine.length() > 1) {
                         aLine = aLine.substring(1);
                     }
                     int i = parseIndex(aLine.charAt(0))-1;
-                    if (!indices.contains(i)) {
+                    if (!indices.contains(i) && 0 <= i && i < pDiceComp.getLength()) {
                         indices.add(i);
                     } else {
                         System.out.println("Index already chosen. Try again");
@@ -30,7 +31,10 @@ public class Input {
                     }
                     aLine = aLine.substring(1);
                 }
-                return indices;
+                if (!pDiceComp.split(indices)) {
+                    throw new IllegalArgumentException();
+                }
+                return;
             } catch (IllegalArgumentException e){
                 System.out.println("Input is not valid. Try again");
             }
@@ -48,5 +52,6 @@ public class Input {
 
         return aIndex;
     }
+
 }
 
