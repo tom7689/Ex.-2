@@ -1,10 +1,12 @@
 package uzh.soco.group27.ex2.game;
 
+import uzh.soco.group27.ex2.card.CardStack;
 import uzh.soco.group27.ex2.dice.Dice;
 import uzh.soco.group27.ex2.dice.DiceComp;
 
 public class Game {
     public static void main(String[] args) {
+
         DiceComp diceComp = Dice.getDices();
         Input in = new Input();
         while (true) {
