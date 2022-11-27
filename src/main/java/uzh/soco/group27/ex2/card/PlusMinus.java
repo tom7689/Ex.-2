@@ -17,7 +17,6 @@ public class PlusMinus implements CardMode{
             }
             if (pDiceComp.isTutto()) {
                 System.out.println("You have a Tutto");
-                System.out.println(pDiceComp.getPoints());
                 isTutto = true;
                 int aValue = 1000;
                 return -aValue;

@@ -24,7 +24,7 @@ public class Bonus implements CardMode {
                 }
                 if (pDiceComp.isTutto()) {
                     System.out.println("You have a Tutto");
-                    System.out.println("Points you could save: " + pDiceComp.getPoints());
+                    System.out.println("Points you could save: " + aValue+pDiceComp.getPoints());
                     isTutto = true;
                     return pDiceComp.getPoints() + aValue;
                 }

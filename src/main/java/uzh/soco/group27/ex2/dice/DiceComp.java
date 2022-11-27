@@ -96,7 +96,7 @@ public class DiceComp{
                 return true;
             }
         }
-        if (pCardMode.getClass() == Straight.class) {
+        else if (pCardMode.getClass() == Straight.class) {
             for (int index : pIndices) {
                 tempDices.add(aDices.get(index));
             }
@@ -106,18 +106,20 @@ public class DiceComp{
                 } else return false;
             } return true;
         }
-        for (int index : pIndices) {
-            if (hasPoints(aDices.get(index)) && !tempDices.contains(aDices.get(index))) {
-                tempDices.add(aDices.get(index));
-            } else return false;
-        }
-        if (testPoints(tempDices)) {
-            selectedDices.addAll(tempDices);
-            for (Dice dice : tempDices) {
-                aDices.remove(dice);
+        else {
+            for (int index : pIndices) {
+                if (hasPoints(aDices.get(index)) && !tempDices.contains(aDices.get(index))) {
+                    tempDices.add(aDices.get(index));
+                } else return false;
             }
-            points += getResults();
-            return true;
+            if (testPoints(tempDices)) {
+                selectedDices.addAll(tempDices);
+                for (Dice dice : tempDices) {
+                    aDices.remove(dice);
+                }
+                points += getResults();
+                return true;
+            }
         }
         assert false;
         return false;

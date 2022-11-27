@@ -78,7 +78,7 @@ public class GameModel {
     private void sortPlayers() {
         playerList.sort(Player.nameComparator);
         for (Player player : playerList) {
-            System.out.println(player);
+            System.out.println("Player "+(int)(playerList.indexOf(player)+1)+": "+player);
         }
     }
     private boolean checkPlayersScore() {
