@@ -92,7 +92,6 @@ public class DiceComp{
                 for (Dice dice : tempDices) {
                     aDices.remove(dice);
                 }
-                points += getResults();
                 return true;
             }
         }

@@ -16,7 +16,6 @@ public class Straight implements CardMode{
             }
             if (pDiceComp.isStraight()) {
                 System.out.println("You have a Straight");
-                System.out.println(pDiceComp.getPoints());
                 isTutto = true;
                 System.out.println("You get 2000 points");
                 return 2000;
