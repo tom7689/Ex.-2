@@ -3,15 +3,9 @@ package uzh.soco.group27.ex2.card;
 import uzh.soco.group27.ex2.dice.DiceComp;
 import uzh.soco.group27.ex2.game.Input;
 
-public class Bonus implements CardMode {
-    private String cardType = "Bonus ";
-    private int aValue;
-    public boolean isTutto = false;
+public class X2 implements CardMode{
 
-    public Bonus(int pValue){
-        this.aValue = pValue;
-        cardType += aValue;
-    }
+    public boolean isTutto = false;
 
     @Override
     public int play(DiceComp pDiceComp, Input pIn) {
@@ -26,7 +20,7 @@ public class Bonus implements CardMode {
                     System.out.println("You have a Tutto");
                     System.out.println("Points you could save: " + pDiceComp.getPoints());
                     isTutto = true;
-                    return pDiceComp.getPoints() + aValue;
+                    return 2*pDiceComp.getPoints();
                 }
                 pIn.selectDices(pDiceComp, this);
                 System.out.println("Points you could save: " + pDiceComp.getPoints());
@@ -39,12 +33,11 @@ public class Bonus implements CardMode {
 
     @Override
     public boolean isTutto() {
-        return isTutto;
+        return false;
     }
 
     @Override
     public String toString() {
-        return cardType;
+        return "X2";
     }
-
 }

@@ -39,4 +39,8 @@ public class Dice {
     public String toString() {
         return ""+aNumber;
     }
+
+    public void setANumber(int i) {
+        aNumber = i;
+    }
 }
