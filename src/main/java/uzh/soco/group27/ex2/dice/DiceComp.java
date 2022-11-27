@@ -169,7 +169,7 @@ public class DiceComp{
                 if (selectedDices.get(dice.getPoints()) == null) {
                     return false;
                 }
-            } catch (NullPointerException e) {
+            } catch (Exception e) {
                 return false;
             }
         }
