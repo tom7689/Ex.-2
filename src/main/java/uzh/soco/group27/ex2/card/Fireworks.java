@@ -3,8 +3,7 @@ package uzh.soco.group27.ex2.card;
 import uzh.soco.group27.ex2.dice.DiceComp;
 import uzh.soco.group27.ex2.game.Input;
 
-public class Cloverleaf implements CardMode {
-    private int aTutto = 0;
+public class Fireworks implements CardMode{
 
     @Override
     public int play(DiceComp pDiceComp, Input pIn) {
@@ -12,19 +11,15 @@ public class Cloverleaf implements CardMode {
             pDiceComp.roll();
             if (pDiceComp.isNull()) {
                 System.out.println("You rolled a Null");
-                return 0;
+                return pDiceComp.getPoints();
             }
             if (pDiceComp.isTutto()) {
-                aTutto++;
-                if (aTutto == 2) {
-                    System.out.println("You won the Game");
-                    return 0;
-                }
-                System.out.println("You have the first Tutto");
+                System.out.println("You have a Tutto");
                 System.out.println(pDiceComp.getPoints());
                 return play(pDiceComp, pIn);
             }
             pIn.selectDices(pDiceComp, this);
+            System.out.println("Points so far: " + pDiceComp.getPoints());
         }
     }
 
@@ -35,10 +30,6 @@ public class Cloverleaf implements CardMode {
 
     @Override
     public String toString() {
-        return "Cloverleaf";
+        return "Fireworks";
     }
-
 }
-
-
-
