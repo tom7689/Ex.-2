@@ -86,17 +86,21 @@ public class DiceComp{
     public boolean split(List<Integer> pIndices, CardMode pCardMode) {
         tempDices.clear();
         if (pCardMode.getClass() == Fireworks.class) {
-            for (int index : pIndices) {
-                if (hasPoints(aDices.get(index)) && !tempDices.contains(aDices.get(index))) {
-                    tempDices.add(aDices.get(index));
-                } else return false;
-            }
-            if (testPoints(tempDices) && isComplete()) {
+            if (testPoints(aDices)) {
+                for (int index : pIndices) {
+                    if (hasPoints(aDices.get(index))) {
+                        tempDices.add(aDices.get(index));
+                    } else return false;
+                }
+                for (Dice dice : aDicesWithPoints) {
+                    if (!tempDices.contains(dice)) {
+                        return false;
+                    }
+                }
                 selectedDices.addAll(tempDices);
                 for (Dice dice : tempDices) {
                     aDices.remove(dice);
                 }
-                return true;
             }
         }
         else if (pCardMode.getClass() == Straight.class) {
@@ -115,7 +119,7 @@ public class DiceComp{
         }
         else {
             for (int index : pIndices) {
-                if (hasPoints(aDices.get(index)) && !tempDices.contains(aDices.get(index))) {
+                if (hasPoints(aDices.get(index))) {
                     tempDices.add(aDices.get(index));
                 } else return false;
             }
@@ -161,10 +165,6 @@ public class DiceComp{
 
     public List<Dice> getaDices() {
         return aDices;
-    }
-
-    public boolean isComplete() {
-        return tempDices.equals(aDicesWithPoints);
     }
 
     public boolean isStraight() {

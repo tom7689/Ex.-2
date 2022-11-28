@@ -18,7 +18,7 @@ public class X2 implements CardMode{
                 }
                 if (pDiceComp.isTutto()) {
                     System.out.println("You have a Tutto");
-                    System.out.println("Points you could save: " + pDiceComp.getPoints());
+                    System.out.println("Points you could save: " + (2*pDiceComp.getPoints()));
                     isTutto = true;
                     return 2*pDiceComp.getPoints();
                 }
