@@ -8,6 +8,7 @@ import uzh.soco.group27.ex2.player.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class GameModel {
 
@@ -70,15 +71,29 @@ public class GameModel {
         }
     }
     private void addPlayers() {
-    playerList = new ArrayList<>(amountOfPlayers);
-    for (int i = 1; i <= amountOfPlayers; i++) {
-        playerList.add(new Player(in.getPlayerName(i)));
+        playerList = new ArrayList<>(amountOfPlayers);
+        for (int i = 1; i <= amountOfPlayers; i++) {
+            while (true) {
+                try {
+                    String name = in.getPlayerName(i);
+                    for (Player player : playerList) {
+                        if (Objects.equals(player.getName(), name)) {
+                            throw new IllegalArgumentException();
+                        }
+                    }
+                    playerList.add(new Player(name));
+                    break;
+                } catch (IllegalArgumentException e) {
+                    System.out.println("name already chosen");
+                }
+            }
         }
     }
+
     private void sortPlayers() {
         playerList.sort(Player.nameComparator);
         for (Player player : playerList) {
-            System.out.println("Player "+(int)(playerList.indexOf(player)+1)+": "+player);
+            System.out.println("Player "+ (playerList.indexOf(player)+1) +": "+player);
         }
     }
     private boolean checkPlayersScore() {
