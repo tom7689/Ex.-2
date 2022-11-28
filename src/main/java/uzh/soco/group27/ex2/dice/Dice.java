@@ -41,6 +41,8 @@ public class Dice {
     }
 
     public void setANumber(int i) {
+        assert i>=1;
+        assert i<=6;
         aNumber = i;
     }
 }

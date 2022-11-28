@@ -5,7 +5,7 @@ import uzh.soco.group27.ex2.card.Fireworks;
 import uzh.soco.group27.ex2.card.Straight;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Arrays;
 import java.util.List;
 
 public class DiceComp{
@@ -14,6 +14,8 @@ public class DiceComp{
     private final List<DiceComp> rolledDices;
     private final List<Dice> tempDices;
     private final List<Dice> aDicesWithPoints;
+    private final List<Dice> straightList = Arrays.asList(new Dice[6]);
+
     private int points;
 
     public DiceComp() {
@@ -22,6 +24,7 @@ public class DiceComp{
         rolledDices = new ArrayList<>(6);
         tempDices = new ArrayList<>(6);
         aDicesWithPoints = new ArrayList<>(6);
+
     }
     public void roll() {
         for (Dice dice : aDices) {
@@ -70,6 +73,7 @@ public class DiceComp{
         aDicesWithPoints.addAll(rolledDices.get(4).getaDices());
         aDicesWithPoints.addAll(rolledDices.get(6).getaDices());
         aDicesWithPoints.addAll(rolledDices.get(7).getaDices());
+
     }
 
     public int getPoints() {
@@ -100,10 +104,14 @@ public class DiceComp{
                 tempDices.add(aDices.get(index));
             }
             for (Dice dice : tempDices) {
-                if (!selectedDices.contains(dice)) {
-                    selectedDices.set(dice.getPoints(), dice);
-                } else return false;
-            } return true;
+                if (straightList.get(dice.getPoints()-1) != null) {
+                    return false;
+                } else {
+                    straightList.set(dice.getPoints()-1, dice);
+                    aDices.remove(dice);
+                }
+            }
+            return true;
         }
         else {
             for (int index : pIndices) {
@@ -151,24 +159,25 @@ public class DiceComp{
         return aDices.size();
     }
 
-    protected List<Dice> getaDices() {
+    public List<Dice> getaDices() {
         return aDices;
     }
 
     public boolean isComplete() {
-        return new HashSet<>(tempDices).containsAll(aDicesWithPoints);
+        return tempDices.equals(aDicesWithPoints);
     }
 
     public boolean isStraight() {
-        return selectedDices.size() == 6;
+        for (int i = 0; i<6; i++) {
+            if (straightList.get(i) == null) {
+                return false;
+            }
+        }
+        return true;
     }
     public boolean isNoStraight() {
         for (Dice dice : aDices) {
-            try {
-                if (selectedDices.get(dice.getPoints()) == null) {
-                    return false;
-                }
-            } catch (Exception e) {
+            if (straightList.get(dice.getPoints()-1) == null) {
                 return false;
             }
         }
@@ -177,6 +186,12 @@ public class DiceComp{
     public void clear() {
         aDices.addAll(selectedDices);
         selectedDices.clear();
+        for (int i = 0; i<6; i++) {
+            if (straightList.get(i) != null) {
+                aDices.add(straightList.get(i));
+                straightList.set(i, null);
+            }
+        }
         rolledDices.clear();
         tempDices.clear();
         aDicesWithPoints.clear();

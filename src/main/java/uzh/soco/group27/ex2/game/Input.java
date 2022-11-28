@@ -28,13 +28,11 @@ public class Input {
                         indices.add(i);
                     } else {
                         System.out.println("Index already chosen. Try again");
-                        indices.clear();
                         throw new IllegalArgumentException();
                     }
                     aLine = aLine.substring(1);
                 }
                 if (!pDiceComp.split(indices, pCardMode)) {
-                    indices.clear();
                     System.out.println("split is not possible");
                     throw new IllegalArgumentException();
                 }
@@ -67,7 +65,7 @@ public class Input {
             }
         }
     }
-    public int getAmountOfPlayers() {
+    public int getNumberOfPlayers() {
         System.out.println("Enter amount of Players (2-4):");
         while (true) {
             String aLine = aInput.nextLine();

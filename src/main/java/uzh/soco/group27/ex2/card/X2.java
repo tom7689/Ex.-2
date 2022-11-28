@@ -25,7 +25,7 @@ public class X2 implements CardMode{
                 pIn.selectDices(pDiceComp, this);
                 System.out.println("Points you could save: " + pDiceComp.getPoints());
             } else {
-                System.out.println(pDiceComp.getPoints());
+                System.out.println("Points saved: " + pDiceComp.getPoints());
                 return pDiceComp.getPoints();
             }
         }
@@ -33,7 +33,7 @@ public class X2 implements CardMode{
 
     @Override
     public boolean isTutto() {
-        return false;
+        return isTutto;
     }
 
     @Override

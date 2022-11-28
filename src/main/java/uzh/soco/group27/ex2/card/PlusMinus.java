@@ -27,7 +27,7 @@ public class PlusMinus implements CardMode{
 
     @Override
     public boolean isTutto() {
-        return false;
+        return isTutto;
     }
 
     @Override

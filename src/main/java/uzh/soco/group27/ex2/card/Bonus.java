@@ -5,7 +5,7 @@ import uzh.soco.group27.ex2.game.Input;
 
 public class Bonus implements CardMode {
     private String cardType = "Bonus ";
-    private int aValue;
+    private final int aValue;
     public boolean isTutto = false;
 
     public Bonus(int pValue){
@@ -31,7 +31,7 @@ public class Bonus implements CardMode {
                 pIn.selectDices(pDiceComp, this);
                 System.out.println("Points you could save: " + pDiceComp.getPoints());
             } else {
-                System.out.println(pDiceComp.getPoints());
+                System.out.println("Points saved: " + pDiceComp.getPoints());
                 return pDiceComp.getPoints();
             }
         }

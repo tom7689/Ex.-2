@@ -11,7 +11,7 @@ public class Straight implements CardMode{
         while (true) {
             pDiceComp.roll();
             if (pDiceComp.isNoStraight()) {
-                System.out.println("You rolled a Null");
+                System.out.println("No Straight possible");
                 return 0;
             }
             if (pDiceComp.isStraight()) {
@@ -26,7 +26,7 @@ public class Straight implements CardMode{
 
     @Override
     public boolean isTutto() {
-        return false;
+        return isTutto;
     }
 
     @Override

@@ -17,15 +17,15 @@ public class GameModel {
     private final Input in;
 
     private final int scoreToReach;
-    private final int amountOfPlayers;
+    private final int numberOfPlayers;
     private List<Player> playerList;
 
     public GameModel() {
         deck = new Deck();
         diceComp = Dice.getDices();
         in = new Input();
-        amountOfPlayers = in.getAmountOfPlayers();
-        System.out.println(amountOfPlayers);
+        numberOfPlayers = in.getNumberOfPlayers();
+        System.out.println("Number of Players: " + numberOfPlayers);
         addPlayers();
         sortPlayers();
         scoreToReach = in.scoreToReach();
@@ -45,6 +45,7 @@ public class GameModel {
                     int tempScore = 0;
                     tempScore += mode.play(diceComp, in);
                     while (mode.isTutto() && in.toContinue()) {
+                        diceComp.clear();
                         mode = deck.draw();
                         System.out.println(mode);
                         int addition = mode.play(diceComp, in);
@@ -71,8 +72,8 @@ public class GameModel {
         }
     }
     private void addPlayers() {
-        playerList = new ArrayList<>(amountOfPlayers);
-        for (int i = 1; i <= amountOfPlayers; i++) {
+        playerList = new ArrayList<>(numberOfPlayers);
+        for (int i = 1; i <= numberOfPlayers; i++) {
             while (true) {
                 try {
                     String name = in.getPlayerName(i);
