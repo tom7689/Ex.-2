@@ -45,6 +45,10 @@ public class GameModel {
                     System.out.println("Card: "+mode);
                     int tempScore = 0;
                     tempScore += mode.play(diceComp, in);
+                    if (tempScore == -1000) {
+                        plusMinusTutto(tempScore);
+                        tempScore = 1000;
+                    }
                     while (mode.isTutto() && in.toContinue()) {
                         diceComp.clear();
                         mode = deck.draw();
@@ -53,9 +57,9 @@ public class GameModel {
                         if (addition > 0) {
                             tempScore += addition;
                         }
-                        if (addition < 0) {
+                        else if (addition == -1000) {
                             plusMinusTutto(addition);
-                            tempScore -= addition;
+                            tempScore = 1000;
                         } else {
                             tempScore = 0;
                         }
