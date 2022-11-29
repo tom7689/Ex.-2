@@ -53,7 +53,7 @@ public final class Card
 	
 	public static CardMode get(int pId)
 	{
-		assert pId >= 1 && pId <= 56;
+		assert pId >= 0 && pId <= 56;
 		return CARDS.get(pId);
 	}
 

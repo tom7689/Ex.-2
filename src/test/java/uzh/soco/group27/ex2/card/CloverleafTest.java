@@ -9,16 +9,16 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class PlusMinusTest {
+class CloverleafTest {
     DiceComp diceComp = Dice.getDices();
-    CardMode aCard = Card.get(21);
+    CardMode aCard = Card.get(0);
 
     List<Integer> allIndices = new ArrayList<>(6);
     List<Integer> OneThreeFive = new ArrayList<>(6);
     List<Integer> TwoFourSix = new ArrayList<>(6);
     List<Integer> SixTwo = new ArrayList<>(6);
     List<Dice> aDices = diceComp.getaDices();
-    PlusMinusTest() {
+    CloverleafTest() {
         setup();
     }
     public void setup() {
@@ -36,7 +36,7 @@ class PlusMinusTest {
     }
 
     @Test
-    public void isPlusMinusCard() {
-        assertEquals(PlusMinus.class, aCard.getClass());
+    public void isCoverleafCard() {
+        assertEquals(Cloverleaf.class, aCard.getClass());
     }
 }
