@@ -67,11 +67,33 @@ class DrillingTest {
                 }
                 TripletsofSix.add(aDice);
             }
-            
+
 
         }
         @Test
-        public void isDrilling() {
-            assertEquals(Drilling.getPoints, aCard.getClass());
+        public void isDrillingOfOne() {
+            assertEquals(Drilling(TripletsofOne).getPoints, 1000);
         }
+
+    @Test
+    public void isDrillingOfTwo() {
+        assertEquals(Drilling(TripletsofTwo).getPoints, 200);
+    }
+    @Test
+    public void isDrillingOfThree() {
+        assertEquals(Drilling(TripletsofThree).getPoints, 300);
+    }
+    @Test
+    public void isDrillingOfFour() {
+        assertEquals(Drilling(TripletsofFour).getPoints, 400);
+    }
+    @Test
+    public void isDrillingOfFive() {
+        assertEquals(Drilling(TripletsofFive).getPoints, 500);
+    }
+    @Test
+    public void isDrillingOfSix() {
+        assertEquals(Drilling(TripletsofSix).getPoints, 600);
+    }
+
 }
