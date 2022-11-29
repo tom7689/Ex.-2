@@ -39,6 +39,7 @@ public class GameModel {
             for (Player player : playerList) {
                 System.out.println("Current player: " +player);
                 diceComp.clear();
+                diceComp.setPointsToZero();
                 if (in.displayScore(player)) {
                     CardMode mode = deck.draw();
                     System.out.println("Card: "+mode);
@@ -47,7 +48,7 @@ public class GameModel {
                     while (mode.isTutto() && in.toContinue()) {
                         diceComp.clear();
                         mode = deck.draw();
-                        System.out.println(mode);
+                        System.out.println("Card: "+mode);
                         int addition = mode.play(diceComp, in);
                         if (addition > 0) {
                             tempScore += addition;
@@ -85,7 +86,7 @@ public class GameModel {
                     playerList.add(new Player(name));
                     break;
                 } catch (IllegalArgumentException e) {
-                    System.out.println("name already chosen");
+                    System.out.println("name already chosen or not valid");
                 }
             }
         }

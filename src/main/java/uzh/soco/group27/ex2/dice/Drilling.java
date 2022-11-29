@@ -3,22 +3,16 @@ package uzh.soco.group27.ex2.dice;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Drilling extends DiceComp{
+public class Drilling{
     private final List<Dice> aDices;
     private final int points;
-    private final int aNumber;
 
-    public Drilling(DiceComp pDiceComp, int pNumber) {
+    public Drilling(List<Dice> pDices, int pNumber) {
         aDices = new ArrayList<>(3);
-        aDices.addAll(pDiceComp.getaDices());
-        aNumber = pNumber;
+        aDices.addAll(pDices);
         int[] drillingValues = {1000, 200, 300, 400, 500, 600,};
         points = drillingValues[pNumber];
     }
-    public int getaNumber() {
-        return aNumber;
-    }
-
     public int getPoints() {
         return points;
     }

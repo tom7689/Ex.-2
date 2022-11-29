@@ -15,9 +15,12 @@ class FireworksTest {
     CardMode aCard = Card.get(1);
 
     List<Integer> allIndices = new ArrayList<>(6);
-    List<Integer> OneThreeFive = new ArrayList<>(6);
-    List<Integer> TwoFourSix = new ArrayList<>(6);
-    List<Integer> SixTwo = new ArrayList<>(6);
+    List<Integer> OneFive = new ArrayList<>(3);
+    List<Integer> OneThreeFive = new ArrayList<>(3);
+    List<Integer> TwoFourSix = new ArrayList<>(3);
+    List<Integer> SixTwo = new ArrayList<>(2);
+    List<Integer> One = new ArrayList<>(1);
+    List<Integer> Two = new ArrayList<>(1);
     List<Dice> aDices = diceComp.getaDices();
 
     FireworksTest() {
@@ -27,6 +30,8 @@ class FireworksTest {
         for (int j=0; j<6; j++) {
             allIndices.add(j);
         }
+        OneFive.add(0);
+        OneFive.add(4);
         for (int j=0; j<6; j+=2) {
             OneThreeFive.add(j);
         }
@@ -35,27 +40,16 @@ class FireworksTest {
         }
         SixTwo.add(5);
         SixTwo.add(1);
+        One.add(0);
+        Two.add(1);
+
     }
 
-    @Test
-    public void allNumbersSet() {
-        diceComp.clear();
-        int i = 1;
-        for (Dice dice : aDices) {
-            dice.setANumber(i);
-            i++;
-        }
-        assertEquals(1, aDices.get(0).getPoints());
-        assertEquals(2, aDices.get(1).getPoints());
-        assertEquals(3, aDices.get(2).getPoints());
-        assertEquals(4, aDices.get(3).getPoints());
-        assertEquals(5, aDices.get(4).getPoints());
-        assertEquals(6, aDices.get(5).getPoints());
-    }
     @Test
     public void isFireworksCard() {
         assertEquals(Fireworks.class, aCard.getClass());
     }
+
     @Test
     public void allNumbers() {
         diceComp.clear();
@@ -64,20 +58,20 @@ class FireworksTest {
             dice.setANumber(i);
             i++;
         }
-        diceComp.split(allIndices, aCard);
-        assertTrue(diceComp.isStraight());
+        assertFalse(diceComp.split(allIndices, aCard));
     }
     @Test
-    public void allNumbersPartlySelecting() {
+    public void allNumbersSelectingOneFive() {
         diceComp.clear();
         int i = 1;
         for (Dice dice : aDices) {
             dice.setANumber(i);
             i++;
         }
-        diceComp.split(OneThreeFive, aCard);
-        assertFalse(diceComp.isStraight());
-        assertFalse(diceComp.isNoStraight());
+        assertFalse(diceComp.isNull());
+        assertTrue(diceComp.split(OneFive, aCard));
+        assertTrue(diceComp.isNull());
+        assertFalse(diceComp.isTutto());
     }
     @Test
     public void allOnes() {
@@ -88,8 +82,74 @@ class FireworksTest {
         aDices.get(3).setANumber(1);
         aDices.get(4).setANumber(1);
         aDices.get(5).setANumber(1);
-        //assertTrue(diceComp.isTutto());
-
+        assertTrue(diceComp.isTutto());
+    }
+    @Test
+    public void Tutto1() {
+        diceComp.clear();
+        aDices.get(0).setANumber(1);
+        aDices.get(1).setANumber(5);
+        aDices.get(2).setANumber(2);
+        aDices.get(3).setANumber(2);
+        aDices.get(4).setANumber(2);
+        aDices.get(5).setANumber(1);
+        assertTrue(diceComp.isTutto());
+    }
+    @Test
+    public void Tutto2() {
+        diceComp.clear();
+        aDices.get(0).setANumber(1);
+        aDices.get(1).setANumber(3);
+        aDices.get(2).setANumber(2);
+        aDices.get(3).setANumber(2);
+        aDices.get(4).setANumber(2);
+        aDices.get(5).setANumber(1);
+        assertFalse(diceComp.isTutto());
+    }
+    @Test
+    public void Null1() {
+        diceComp.clear();
+        aDices.get(0).setANumber(2);
+        aDices.get(1).setANumber(3);
+        aDices.get(2).setANumber(2);
+        aDices.get(3).setANumber(4);
+        aDices.get(4).setANumber(6);
+        aDices.get(5).setANumber(6);
+        assertTrue(diceComp.isNull());
+    }
+    @Test
+    public void notAllDicesWithPointsSelected() {
+        diceComp.clear();
+        aDices.get(0).setANumber(1);
+        aDices.get(1).setANumber(2);
+        aDices.get(2).setANumber(2);
+        aDices.get(3).setANumber(2);
+        aDices.get(4).setANumber(5);
+        aDices.get(5).setANumber(2);
+        assertFalse(diceComp.split(One, aCard));
+        assertFalse(diceComp.split(OneFive, aCard));
+        assertFalse(diceComp.split(TwoFourSix, aCard));
+    }
+    @Test
+    public void PartlySelection1() {
+        diceComp.clear();
+        aDices.get(0).setANumber(2);
+        aDices.get(1).setANumber(1);
+        aDices.get(2).setANumber(3);
+        aDices.get(3).setANumber(5);
+        aDices.get(4).setANumber(6);
+        aDices.get(5).setANumber(5);
+        assertTrue(diceComp.split(TwoFourSix, aCard));
+        aDices.get(0).setANumber(1);
+        aDices.get(1).setANumber(2);
+        aDices.get(2).setANumber(3);
+        assertTrue(diceComp.split(One, aCard));
+        aDices.get(0).setANumber(2);
+        aDices.get(1).setANumber(5);
+        assertTrue(diceComp.split(Two, aCard));
+        aDices.get(0).setANumber(1);
+        assertTrue(diceComp.split(One, aCard));
+        assertTrue(diceComp.isTutto());
     }
 
 }
