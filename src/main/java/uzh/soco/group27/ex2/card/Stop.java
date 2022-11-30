@@ -6,14 +6,16 @@ import uzh.soco.group27.ex2.game.Input;
 public class Stop implements CardMode{
 
     @Override
-    public int play(DiceComp pDiceComp, Input pIn) {
-        return 0;
+    public void play(DiceComp pDiceComp, Input pIn) {
     }
 
     @Override
     public boolean isTutto() {
         return false;
     }
+
+    @Override
+    public void setTuttoBack() {}
 
     @Override
     public String toString() {

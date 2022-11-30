@@ -6,17 +6,17 @@ import uzh.soco.group27.ex2.game.Input;
 public class Fireworks implements CardMode{
 
     @Override
-    public int play(DiceComp pDiceComp, Input pIn) {
+    public void play(DiceComp pDiceComp, Input pIn) {
         while (true) {
             pDiceComp.roll();
             if (pDiceComp.isNull()) {
                 System.out.println("You rolled a Null");
-                return pDiceComp.getPoints();
+                System.out.println("Points saved: " + pDiceComp.getPoints());
+                return;
             }
             if (pDiceComp.isTutto()) {
                 System.out.println("You have a Tutto");
-                System.out.println(pDiceComp.getPoints());
-                return play(pDiceComp, pIn);
+                System.out.println("Points so far: " + pDiceComp.getPoints());
             }
             pIn.selectDices(pDiceComp, this);
             System.out.println("Points so far: " + pDiceComp.getPoints());
@@ -27,6 +27,9 @@ public class Fireworks implements CardMode{
     public boolean isTutto() {
         return false;
     }
+
+    @Override
+    public void setTuttoBack() {}
 
     @Override
     public String toString() {

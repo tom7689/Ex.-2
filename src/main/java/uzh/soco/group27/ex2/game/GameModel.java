@@ -43,35 +43,29 @@ public class GameModel {
                 if (in.displayScore(player)) {
                     CardMode mode = deck.draw();
                     System.out.println("Card: "+mode);
-                    int tempScore = 0;
-                    tempScore += mode.play(diceComp, in);
-                    if (tempScore == -1000) {
-                        plusMinusTutto(tempScore);
-                        tempScore = 1000;
-                    }
+                    mode.play(diceComp, in);
                     while (mode.isTutto() && in.toContinue()) {
                         diceComp.clear();
+                        mode.setTuttoBack();
                         mode = deck.draw();
                         System.out.println("Card: "+mode);
-                        int addition = mode.play(diceComp, in);
-                        if (addition > 0) {
-                            tempScore += addition;
-                        }
-                        else if (addition == -1000) {
-                            plusMinusTutto(addition);
-                            tempScore = 1000;
-                        } else {
-                            tempScore = 0;
+                        mode.play(diceComp, in);
+                        if (!mode.isTutto()) {
+                            diceComp.setPointsToZero();
                         }
                     }
-                    player.setScore(tempScore);
-                    if (checkPlayersScore()) {
-                        System.out.println("You won");
-                        for (Player player1 : playerList) {
-                            System.out.println(player1.getName() + ": " + player1.getScore());
-                        }
-                        return;
+                }
+                if (diceComp.plusMinusTutto()) {
+                    diceComp.setPlusMinusTuttoBack();
+                    plusMinusTutto();
+                }
+                player.setScore(diceComp.getPoints());
+                if (checkPlayersScore() || diceComp.isCloverleaf()) {
+                    System.out.println("You won");
+                    for (Player player1 : playerList) {
+                        System.out.println(player1.getName() + ": " + player1.getScore());
                     }
+                    return;
                 }
             }
         }
@@ -110,18 +104,20 @@ public class GameModel {
         }
         return false;
     }
-    private void sortPlayersScore() {
-        playerList.sort(Player.scoreComparator);
-        for (Player player : playerList) {
-            System.out.println(player);
+    private List<Player> sortPlayersScore() {
+        List<Player> Ranking = new ArrayList<>(playerList);
+        Ranking.sort(Player.scoreComparator);
+        for (Player player : Ranking) {
+            System.out.println(player+": "+player.getScore());
         }
+        return Ranking;
     }
-    private void plusMinusTutto(int malus) {
-        sortPlayersScore();
-        int maxScore = playerList.get(0).getScore();
-        for (Player player : playerList) {
+    private void plusMinusTutto() {
+        List<Player> Ranking = sortPlayersScore();
+        int maxScore = Ranking.get(0).getScore();
+        for (Player player : Ranking) {
             if (player.getScore() == maxScore) {
-                player.setScore(malus);
+                player.setScore(-1000);
             }
         }
     }

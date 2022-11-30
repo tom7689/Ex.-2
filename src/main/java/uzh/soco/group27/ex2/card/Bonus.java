@@ -14,25 +14,26 @@ public class Bonus implements CardMode {
     }
 
     @Override
-    public int play(DiceComp pDiceComp, Input pIn) {
+    public void play(DiceComp pDiceComp, Input pIn) {
         while (true) {
             if (pIn.toContinue()) {
                 pDiceComp.roll();
                 if (pDiceComp.isNull()) {
                     System.out.println("You rolled a Null");
-                    return 0;
+                    return;
                 }
                 if (pDiceComp.isTutto()) {
                     System.out.println("You have a Tutto");
                     System.out.println("Points you could save: " + (aValue+pDiceComp.getPoints()));
                     isTutto = true;
-                    return pDiceComp.getPoints() + aValue;
+                    pDiceComp.addBonusPoints(aValue);
+                    return;
                 }
                 pIn.selectDices(pDiceComp, this);
                 System.out.println("Points you could save: " + pDiceComp.getPoints());
             } else {
                 System.out.println("Points saved: " + pDiceComp.getPoints());
-                return pDiceComp.getPoints();
+                return;
             }
         }
     }
@@ -40,6 +41,11 @@ public class Bonus implements CardMode {
     @Override
     public boolean isTutto() {
         return isTutto;
+    }
+
+    @Override
+    public void setTuttoBack() {
+        this.isTutto = false;
     }
 
     @Override

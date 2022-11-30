@@ -7,22 +7,24 @@ public class Cloverleaf implements CardMode {
     private int aTutto = 0;
 
     @Override
-    public int play(DiceComp pDiceComp, Input pIn) {
+    public void play(DiceComp pDiceComp, Input pIn) {
         while (true) {
             pDiceComp.roll();
             if (pDiceComp.isNull()) {
                 System.out.println("You rolled a Null");
-                return 0;
+                return;
             }
             if (pDiceComp.isTutto()) {
                 aTutto++;
                 if (aTutto == 2) {
+                    pDiceComp.setCloverleaf();
                     System.out.println("You won the Game");
-                    return 0;
+                    return;
                 }
                 System.out.println("You have the first Tutto");
                 System.out.println(pDiceComp.getPoints());
-                return play(pDiceComp, pIn);
+                play(pDiceComp, pIn);
+                return;
             }
             pIn.selectDices(pDiceComp, this);
         }
@@ -32,6 +34,9 @@ public class Cloverleaf implements CardMode {
     public boolean isTutto() {
         return false;
     }
+
+    @Override
+    public void setTuttoBack() {}
 
     @Override
     public String toString() {

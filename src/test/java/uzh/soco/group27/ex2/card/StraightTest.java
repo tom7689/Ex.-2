@@ -3,7 +3,6 @@ package uzh.soco.group27.ex2.card;
 import org.junit.jupiter.api.Test;
 import uzh.soco.group27.ex2.dice.Dice;
 import uzh.soco.group27.ex2.dice.DiceComp;
-import uzh.soco.group27.ex2.game.Input;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,14 +12,17 @@ import static org.junit.jupiter.api.Assertions.*;
 class StraightTest {
     DiceComp diceComp = Dice.getDices();
     CardMode aCard = Card.get(16);
-    Input aIn = new Input();
+
 
     List<Integer> allIndices = new ArrayList<>(6);
     List<Integer> OneThreeFive = new ArrayList<>(6);
     List<Integer> TwoFourSix = new ArrayList<>(6);
+
+    List<Integer> OneTwoThreeFiveSix = new ArrayList<>(6);
     List<Integer> SixTwo = new ArrayList<>(6);
     List<Integer> One = new ArrayList<>(6);
     List<Integer> Two = new ArrayList<>(6);
+    List<Integer> Three = new ArrayList<>(6);
     List<Dice> aDices = diceComp.getaDices();
     StraightTest() {
         setup();
@@ -35,11 +37,19 @@ class StraightTest {
         for (int j=1; j<6; j+=2) {
             TwoFourSix.add(j);
         }
-            SixTwo.add(5);
-            SixTwo.add(1);
-            One.add(0);
-            Two.add(1);
+        SixTwo.add(5);
+        SixTwo.add(1);
+        One.add(0);
+        Two.add(1);
+        Three.add(2);
+        OneTwoThreeFiveSix.add(0);
+        OneTwoThreeFiveSix.add(1);
+        OneTwoThreeFiveSix.add(2);
+        OneTwoThreeFiveSix.add(4);
+        OneTwoThreeFiveSix.add(5);
         }
+
+
 
     @Test
     public void allNumbersSet() {
@@ -129,6 +139,20 @@ class StraightTest {
         aDices.get(1).setANumber(5);
         diceComp.split(Two, aCard);
         aDices.get(0).setANumber(6);
+        diceComp.split(One, aCard);
+        assertTrue(diceComp.isStraight());
+    }
+    @Test
+    public void partlySelectingStraight2() {
+        diceComp.clear();
+        aDices.get(0).setANumber(4);
+        aDices.get(1).setANumber(2);
+        aDices.get(2).setANumber(6);
+        aDices.get(3).setANumber(6);
+        aDices.get(4).setANumber(5);
+        aDices.get(5).setANumber(1);
+        diceComp.split(OneTwoThreeFiveSix, aCard);
+        aDices.get(0).setANumber(3);
         diceComp.split(One, aCard);
         assertTrue(diceComp.isStraight());
     }

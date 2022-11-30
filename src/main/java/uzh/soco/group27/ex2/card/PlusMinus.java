@@ -8,18 +8,19 @@ public class PlusMinus implements CardMode{
     public boolean isTutto = false;
 
     @Override
-    public int play(DiceComp pDiceComp, Input pIn) {
+    public void play(DiceComp pDiceComp, Input pIn) {
         while (true) {
             pDiceComp.roll();
             if (pDiceComp.isNull()) {
                 System.out.println("You rolled a Null");
-                return 0;
+                return;
             }
             if (pDiceComp.isTutto()) {
                 System.out.println("You have a Tutto");
                 isTutto = true;
-                int aValue = 1000;
-                return -aValue;
+                pDiceComp.addBonusPoints(1000);
+                pDiceComp.setPlusMinusTutto();
+                return;
             }
             pIn.selectDices(pDiceComp, this);
         }
@@ -28,6 +29,11 @@ public class PlusMinus implements CardMode{
     @Override
     public boolean isTutto() {
         return isTutto;
+    }
+
+    @Override
+    public void setTuttoBack() {
+        this.isTutto = false;
     }
 
     @Override

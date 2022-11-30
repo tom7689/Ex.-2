@@ -2,6 +2,7 @@ package uzh.soco.group27.ex2.dice;
 
 import uzh.soco.group27.ex2.card.CardMode;
 import uzh.soco.group27.ex2.card.Fireworks;
+import uzh.soco.group27.ex2.card.PlusMinus;
 import uzh.soco.group27.ex2.card.Straight;
 
 import java.util.ArrayList;
@@ -16,6 +17,8 @@ public class DiceComp{
     private final List<Dice> aDicesWithPoints;
     private final List<Dice> straightList = Arrays.asList(new Dice[6]);
     private final List<Drilling> drillingList;
+    private boolean plusMinusTutto = false;
+    private boolean cloverleaf = false;
     private int points;
 
     public DiceComp() {
@@ -126,6 +129,25 @@ public class DiceComp{
             }
             return true;
         }
+        else if (pCardMode.getClass() == PlusMinus.class){
+            for (int index : pIndices) {
+                if (hasNoPoints(aDices.get(index))) {
+                    tempDices.clear();
+                    return false;
+                } else {
+                    tempDices.add(aDices.get(index));
+                }
+            }
+            if (testPoints(tempDices)) {
+                selectedDices.addAll(tempDices);
+                for (Dice dice : tempDices) {
+                    aDices.remove(dice);
+                }
+                aDicesWithPoints.clear();
+                tempDices.clear();
+                return true;
+            }
+        }
         else {
             for (int index : pIndices) {
                 if (hasNoPoints(aDices.get(index))) {
@@ -177,6 +199,10 @@ public class DiceComp{
         return aDices;
     }
 
+    /**
+     * @pre dices need to be selected.
+     * @return true when straight is reached.
+     */
     public boolean isStraight() {
         for (int i = 0; i<6; i++) {
             if (straightList.get(i) == null) {
@@ -185,6 +211,10 @@ public class DiceComp{
         }
         return true;
     }
+    /**
+     * @pre checks if it is not possible to get a straight before selecting dices.
+     * @return true, if not possibly anymore.
+     */
     public boolean isNoStraight() {
         for (Dice dice : aDices) {
             if (straightList.get(dice.getPoints()-1) == null) {
@@ -192,6 +222,9 @@ public class DiceComp{
             }
         }
         return true;
+    }
+    public List<Dice> getStraightList() {
+        return straightList;
     }
     public void clear() {
         aDices.addAll(selectedDices);
@@ -210,6 +243,27 @@ public class DiceComp{
 
     public void setPointsToZero() {
         this.points = 0;
+    }
+
+    public void addBonusPoints(int bonus) {
+        this.points += bonus;
+    }
+    public void setPlusMinusTutto() {
+        plusMinusTutto = true;
+        points -= getResults();
+    }
+    public void setPlusMinusTuttoBack() {
+        this.plusMinusTutto = false;
+    }
+    public boolean plusMinusTutto() {
+        return plusMinusTutto;
+    }
+
+    public void setCloverleaf() {
+        cloverleaf = true;
+    }
+    public boolean isCloverleaf() {
+        return cloverleaf;
     }
 
     @Override

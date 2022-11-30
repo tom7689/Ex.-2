@@ -8,25 +8,26 @@ public class X2 implements CardMode{
     public boolean isTutto = false;
 
     @Override
-    public int play(DiceComp pDiceComp, Input pIn) {
+    public void play(DiceComp pDiceComp, Input pIn) {
         while (true) {
             if (pIn.toContinue()) {
                 pDiceComp.roll();
                 if (pDiceComp.isNull()) {
                     System.out.println("You rolled a Null");
-                    return 0;
+                    return;
                 }
                 if (pDiceComp.isTutto()) {
                     System.out.println("You have a Tutto");
                     System.out.println("Points you could save: " + (2*pDiceComp.getPoints()));
                     isTutto = true;
-                    return 2*pDiceComp.getPoints();
+                    pDiceComp.addBonusPoints(pDiceComp.getPoints());
+                    return;
                 }
                 pIn.selectDices(pDiceComp, this);
                 System.out.println("Points you could save: " + pDiceComp.getPoints());
             } else {
                 System.out.println("Points saved: " + pDiceComp.getPoints());
-                return pDiceComp.getPoints();
+                return;
             }
         }
     }
@@ -34,6 +35,11 @@ public class X2 implements CardMode{
     @Override
     public boolean isTutto() {
         return isTutto;
+    }
+
+    @Override
+    public void setTuttoBack() {
+        this.isTutto = false;
     }
 
     @Override
