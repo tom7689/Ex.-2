@@ -3,6 +3,7 @@ package uzh.soco.group27.ex2.card;
 import org.junit.jupiter.api.Test;
 import uzh.soco.group27.ex2.dice.Dice;
 import uzh.soco.group27.ex2.dice.DiceComp;
+import uzh.soco.group27.ex2.game.GameModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,4 +40,5 @@ class PlusMinusTest {
     public void isPlusMinusCard() {
         assertEquals(PlusMinus.class, aCard.getClass());
     }
+
 }

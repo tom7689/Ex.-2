@@ -7,7 +7,7 @@ import uzh.soco.group27.ex2.dice.DiceComp;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class BonusTest {
     DiceComp diceComp = Dice.getDices();
@@ -38,6 +38,18 @@ class BonusTest {
     @Test
     public void isBonusCard() {
         assertEquals(Bonus.class, aCard.getClass());
+    }
+
+    @Test
+    public void isNull(){
+        diceComp.clear();
+        aDices.get(0).setANumber(2);
+        aDices.get(1).setANumber(2);
+        aDices.get(2).setANumber(4);
+        aDices.get(3).setANumber(4);
+        aDices.get(4).setANumber(6);
+        aDices.get(5).setANumber(6);
+        assertTrue(diceComp.isNull());
     }
 
 
