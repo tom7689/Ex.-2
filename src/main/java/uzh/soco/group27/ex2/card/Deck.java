@@ -5,11 +5,12 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Models a deck of 56 cards.
+ * Models a deck of the 56 Tutto cards.
  */
 public class Deck 
 {
 	private CardStack aCards;
+	private int aCount = 0;
 	
 	/**
 	 * Creates a new deck of 56 cards, shuffled.
@@ -18,14 +19,11 @@ public class Deck
 	{
 		shuffle();
 	}
-	
-	/**
-	 * Reinitializes the deck with all 56 cards, and shuffles them.
-	 */
+
 	public void shuffle()
 	{
 		List<CardMode> cards = new ArrayList<>();
-		for(int i = 1; i <= 56; i++) {
+		for(int i = 0; i < 56; i++) {
 			cards.add(Card.get(i));
 		}
 		Collections.shuffle(cards);
@@ -40,6 +38,10 @@ public class Deck
 	public void push(CardMode pCard)
 	{
 		assert pCard != null;
+		if (aCount == 56) {
+			aCards.shuffle();
+			aCount = 0;
+		}
 		aCards.push(pCard);
 	}
 	
@@ -51,7 +53,12 @@ public class Deck
 	public CardMode draw()
 	{
 		assert !isEmpty();
+		aCount++;
 		return aCards.pop();
+	}
+
+	public void print() {
+		aCards.print();
 	}
 	
 	/**

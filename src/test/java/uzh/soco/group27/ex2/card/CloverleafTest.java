@@ -36,7 +36,7 @@ class CloverleafTest {
     }
 
     @Test
-    public void isCoverleafCard() {
+    public void isCloverleafCard() {
         assertEquals(Cloverleaf.class, aCard.getClass());
     }
 }

@@ -100,6 +100,7 @@ public class DiceComp{
             for (Dice dice : aDicesWithPoints) {
                 if (!tempDices.contains(dice)) {
                     tempDices.clear();
+                    System.out.println("Please select all counting dices");
                     return false;
                 }
             }

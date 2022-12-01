@@ -22,6 +22,7 @@ public class GameModel {
 
     public GameModel() {
         deck = new Deck();
+        deck.print();
         diceComp = Dice.getDices();
         in = new Input();
         numberOfPlayers = in.getNumberOfPlayers();
@@ -37,22 +38,22 @@ public class GameModel {
     private void Tutto() {
         while (true) {
             for (Player player : playerList) {
+                System.out.println("----------------------------------------");
                 System.out.println("Current player: " +player);
                 diceComp.clear();
                 diceComp.setPointsToZero();
-                if (in.displayScore(player)) {
+                if (in.displayScore(playerList)) {
                     CardMode mode = deck.draw();
                     System.out.println("Card: "+mode);
                     mode.play(diceComp, in);
+                    deck.push(mode);
                     while (mode.isTutto() && in.toContinue()) {
                         diceComp.clear();
                         mode.setTuttoBack();
                         mode = deck.draw();
-                        System.out.println("Card: "+mode);
+                        System.out.println("Card: " + mode);
                         mode.play(diceComp, in);
-                        if (!mode.isTutto()) {
-                            diceComp.setPointsToZero();
-                        }
+                        deck.push(mode);
                     }
                 }
                 if (diceComp.plusMinusTutto()) {
@@ -107,6 +108,7 @@ public class GameModel {
     private List<Player> sortPlayersScore() {
         List<Player> Ranking = new ArrayList<>(playerList);
         Ranking.sort(Player.scoreComparator);
+        System.out.println("Current ranking:");
         for (Player player : Ranking) {
             System.out.println(player+": "+player.getScore());
         }

@@ -110,15 +110,19 @@ public class Input {
             }
         }
     }
-    public boolean displayScore(Player aPlayer) {
+    public boolean displayScore(List<Player> aPlayers) {
+        System.out.println("Press (R)oll or (D)isplay current scores");
         while (true) {
-            System.out.println("Press (R)oll or (D)isplay your score");
+
             String aLine = aInput.nextLine();
             if (aLine.equals("R")) {
                 return true;
             } else if (aLine.equals("D")) {
-                System.out.println("Your score: " + aPlayer.getScore());
+                for (Player player : aPlayers) {
+                    System.out.println(player.getName() + ": " + player.getScore());
+                }
             }
+            System.out.println("Press (R)oll to roll the dices");
         }
     }
 }

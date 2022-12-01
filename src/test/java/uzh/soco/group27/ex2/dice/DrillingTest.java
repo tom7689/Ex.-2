@@ -1,4 +1,4 @@
-package uzh.soco.group27.ex2.testing.dice;
+/**package uzh.soco.group27.ex2.testing.dice;
 
 import org.junit.jupiter.api.Test;
 import uzh.soco.group27.ex2.dice.Dice;
@@ -96,4 +96,5 @@ class DrillingTest {
         assertEquals(Drilling(TripletsofSix).getPoints, 600);
     }
 
-}
+    }
+**/

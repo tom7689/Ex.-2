@@ -11,6 +11,7 @@ public class Cloverleaf implements CardMode {
         while (true) {
             pDiceComp.roll();
             if (pDiceComp.isNull()) {
+                pDiceComp.setPointsToZero();
                 System.out.println("You rolled a Null");
                 return;
             }
@@ -18,11 +19,11 @@ public class Cloverleaf implements CardMode {
                 aTutto++;
                 if (aTutto == 2) {
                     pDiceComp.setCloverleaf();
-                    System.out.println("You won the Game");
                     return;
                 }
                 System.out.println("You have the first Tutto");
                 System.out.println(pDiceComp.getPoints());
+                pDiceComp.clear();
                 play(pDiceComp, pIn);
                 return;
             }
