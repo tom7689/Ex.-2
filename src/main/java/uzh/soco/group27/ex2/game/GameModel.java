@@ -22,7 +22,6 @@ public class GameModel {
 
     public GameModel() {
         deck = new Deck();
-        deck.print();
         diceComp = Dice.getDices();
         in = new Input();
         numberOfPlayers = in.getNumberOfPlayers();
@@ -58,7 +57,7 @@ public class GameModel {
                 }
                 if (diceComp.plusMinusTutto()) {
                     diceComp.setPlusMinusTuttoBack();
-                    plusMinusTutto();
+                    plusMinusTutto(player);
                 }
                 player.setScore(diceComp.getPoints());
                 if (checkPlayersScore() || diceComp.isCloverleaf()) {
@@ -114,11 +113,11 @@ public class GameModel {
         }
         return Ranking;
     }
-    private void plusMinusTutto() {
+    private void plusMinusTutto(Player aPlayer) {
         List<Player> Ranking = sortPlayersScore();
         int maxScore = Ranking.get(0).getScore();
         for (Player player : Ranking) {
-            if (player.getScore() == maxScore) {
+            if (player.getScore() == maxScore && !player.equals(aPlayer)) {
                 player.setScore(-1000);
             }
         }

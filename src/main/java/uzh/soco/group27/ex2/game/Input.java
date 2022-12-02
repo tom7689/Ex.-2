@@ -16,12 +16,15 @@ public class Input {
         System.out.println("Enter dices (separated by comma) to select: ");
         while (true) {
             String aLine = aInput.nextLine();
-            indices.clear();
             try {
                 assert aLine.length() <= pDiceComp.getLength()*2;
                 while (!aLine.isEmpty()) {
-                    if (aLine.charAt(0) == ',' && aLine.length() > 1) {
-                        aLine = aLine.substring(1);
+                    if (aLine.charAt(0) == ',') {
+                        if (aLine.length() > 1) {
+                            aLine = aLine.substring(1);
+                        } else {
+                            break;
+                        }
                     }
                     int i = parseIndex(aLine.charAt(0))-1;
                     if (!indices.contains(i) && 0 <= i && i < pDiceComp.getLength()) {
@@ -38,7 +41,7 @@ public class Input {
                 }
                 return;
             } catch (IllegalArgumentException e){
-                System.out.println("Input is not valid. Try again");
+                indices.clear();
             }
         }
     }
@@ -48,7 +51,7 @@ public class Input {
         int aIndex = Character.getNumericValue(pChar);
 
         if (aIndex > 6 || aIndex < 1) {
-            System.out.println("Index is not valid");
+            System.out.println("Index is not valid or out of range");
             throw new IllegalArgumentException();
         }
         return aIndex;
