@@ -36,10 +36,14 @@ class x2Test {
         SixTwo.add(5);
         SixTwo.add(1);
     }
+    @Test
+    public void isNull(){
 
+    }
     @Test
     public void isx2Card() {
         assertEquals(X2.class, aCard.getClass());
     }
+
 
 }

@@ -11,7 +11,7 @@ public class Dice {
             DICES.add(new Dice());
         }
     }
-    private Dice() {
+    Dice() {
     }
     public static DiceComp getDices() {
         return DICES;
