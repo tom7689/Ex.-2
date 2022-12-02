@@ -17,6 +17,8 @@ public class Fireworks implements CardMode{
             if (pDiceComp.isTutto()) {
                 System.out.println("You have a Tutto");
                 System.out.println("Points so far: " + pDiceComp.getPoints());
+                pDiceComp.clear();
+                play(pDiceComp, pIn);
             }
             pIn.selectDices(pDiceComp, this);
             System.out.println("Points so far: " + pDiceComp.getPoints());

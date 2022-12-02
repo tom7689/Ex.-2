@@ -100,19 +100,22 @@ public class DiceComp{
             for (Dice dice : aDicesWithPoints) {
                 if (!tempDices.contains(dice)) {
                     tempDices.clear();
+                    System.out.println("Please select all counting dices");
                     return false;
                 }
             }
-            if (testPoints(tempDices)) {
-                selectedDices.addAll(tempDices);
-                for (Dice dice : tempDices) {
-                    aDices.remove(dice);
-                }
-                aDicesWithPoints.clear();
+            if (!testPoints(tempDices)) {
                 tempDices.clear();
-                points += getResults();
-                return true;
+                return false;
             }
+            selectedDices.addAll(tempDices);
+            for (Dice dice : tempDices) {
+                aDices.remove(dice);
+            }
+            aDicesWithPoints.clear();
+            tempDices.clear();
+            points += getResults();
+            return true;
         }
         else if (pCardMode.getClass() == Straight.class) {
             for (int index : pIndices) {
@@ -138,15 +141,17 @@ public class DiceComp{
                     tempDices.add(aDices.get(index));
                 }
             }
-            if (testPoints(tempDices)) {
-                selectedDices.addAll(tempDices);
-                for (Dice dice : tempDices) {
-                    aDices.remove(dice);
-                }
-                aDicesWithPoints.clear();
+            if (!testPoints(tempDices)) {
                 tempDices.clear();
-                return true;
+                return false;
             }
+            selectedDices.addAll(tempDices);
+            for (Dice dice : tempDices) {
+                aDices.remove(dice);
+            }
+            aDicesWithPoints.clear();
+            tempDices.clear();
+            return true;
         }
         else {
             for (int index : pIndices) {
@@ -157,19 +162,19 @@ public class DiceComp{
                     tempDices.add(aDices.get(index));
                 }
             }
-            if (testPoints(tempDices)) {
-                selectedDices.addAll(tempDices);
-                for (Dice dice : tempDices) {
-                    aDices.remove(dice);
-                }
-                aDicesWithPoints.clear();
+            if (!testPoints(tempDices)) {
                 tempDices.clear();
-                points += getResults();
-                return true;
+                return false;
             }
+            selectedDices.addAll(tempDices);
+            for (Dice dice : tempDices) {
+                aDices.remove(dice);
+            }
+            aDicesWithPoints.clear();
+            tempDices.clear();
+            points += getResults();
+            return true;
         }
-        assert false;
-        return false;
     }
 
     public boolean isNull() {

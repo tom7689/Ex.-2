@@ -1,6 +1,7 @@
 package uzh.soco.group27.ex2.card;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -33,12 +34,24 @@ public class CardStack implements Iterable<CardMode>{
     public CardMode pop()
     {
         assert !isEmpty();
-        return aCards.remove(aCards.size()-1);
+        return aCards.remove(0);
     }
 
     public boolean isEmpty()
     {
         return aCards.size() == 0;
+    }
+
+    public void shuffle() {
+        Collections.shuffle(aCards);
+    }
+
+    public void print() {
+        int i = 1;
+        for (CardMode card : aCards) {
+            System.out.println(i+" " + card);
+            i++;
+        }
     }
 
     @Override

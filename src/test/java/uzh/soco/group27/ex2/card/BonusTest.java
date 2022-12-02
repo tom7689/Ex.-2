@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BonusTest {
     DiceComp diceComp = Dice.getDices();
-    CardMode aCard = Card.get(56);
+    CardMode aCard = Card.get(55);
 
     List<Integer> allIndices = new ArrayList<>(6);
     List<Integer> OneThreeFive = new ArrayList<>(6);

@@ -19,6 +19,7 @@ public class Bonus implements CardMode {
             if (pIn.toContinue()) {
                 pDiceComp.roll();
                 if (pDiceComp.isNull()) {
+                    pDiceComp.setPointsToZero();
                     System.out.println("You rolled a Null");
                     return;
                 }

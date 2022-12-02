@@ -35,9 +35,12 @@ public final class Card
 
 		}
 		for (int quantity = 1; quantity <= CardType.BONUS.quantity; quantity++) {
-			for (int value = 200; value <= 600; value += 100){
-				CARDS.add(new Bonus(value));
-
+			for (int i = 1; i <= 5; i++) {
+				CARDS.add(new Bonus(200));
+				CARDS.add(new Bonus(300));
+				CARDS.add(new Bonus(400));
+				CARDS.add(new Bonus(500));
+				CARDS.add(new Bonus(600));
 			}
 		}
 	}
@@ -53,7 +56,7 @@ public final class Card
 	
 	public static CardMode get(int pId)
 	{
-		assert pId >= 1 && pId <= 56;
+		assert pId >= 0 && pId <= 55;
 		return CARDS.get(pId);
 	}
 

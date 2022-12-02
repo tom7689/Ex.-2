@@ -7,6 +7,7 @@ public class Stop implements CardMode{
 
     @Override
     public void play(DiceComp pDiceComp, Input pIn) {
+        pDiceComp.setPointsToZero();
     }
 
     @Override

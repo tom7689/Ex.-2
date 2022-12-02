@@ -63,6 +63,7 @@ class FireworksTest {
     @Test
     public void allNumbersSelectingOneFive() {
         diceComp.clear();
+        diceComp.setPointsToZero();
         int i = 1;
         for (Dice dice : aDices) {
             dice.setANumber(i);
@@ -72,10 +73,12 @@ class FireworksTest {
         assertTrue(diceComp.split(OneFive, aCard));
         assertTrue(diceComp.isNull());
         assertFalse(diceComp.isTutto());
+        assertEquals(150, diceComp.getPoints());
     }
     @Test
     public void allOnes() {
         diceComp.clear();
+        diceComp.setPointsToZero();
         aDices.get(0).setANumber(1);
         aDices.get(1).setANumber(1);
         aDices.get(2).setANumber(1);
@@ -83,6 +86,7 @@ class FireworksTest {
         aDices.get(4).setANumber(1);
         aDices.get(5).setANumber(1);
         assertTrue(diceComp.isTutto());
+        assertEquals(2000, diceComp.getPoints());
     }
     @Test
     public void Tutto1() {
@@ -94,6 +98,7 @@ class FireworksTest {
         aDices.get(4).setANumber(2);
         aDices.get(5).setANumber(1);
         assertTrue(diceComp.isTutto());
+        assertEquals(450, diceComp.getPoints());
     }
     @Test
     public void Tutto2() {
@@ -133,6 +138,7 @@ class FireworksTest {
     @Test
     public void PartlySelection1() {
         diceComp.clear();
+        diceComp.setPointsToZero();
         aDices.get(0).setANumber(2);
         aDices.get(1).setANumber(1);
         aDices.get(2).setANumber(3);
@@ -140,16 +146,45 @@ class FireworksTest {
         aDices.get(4).setANumber(6);
         aDices.get(5).setANumber(5);
         assertTrue(diceComp.split(TwoFourSix, aCard));
+        assertEquals(200, diceComp.getPoints());
         aDices.get(0).setANumber(1);
         aDices.get(1).setANumber(2);
         aDices.get(2).setANumber(3);
         assertTrue(diceComp.split(One, aCard));
+        assertEquals(300, diceComp.getPoints());
         aDices.get(0).setANumber(2);
         aDices.get(1).setANumber(5);
         assertTrue(diceComp.split(Two, aCard));
+        assertEquals(350, diceComp.getPoints());
         aDices.get(0).setANumber(1);
-        assertTrue(diceComp.split(One, aCard));
         assertTrue(diceComp.isTutto());
+        assertEquals(450, diceComp.getPoints());
+        diceComp.clear();
+        aDices.get(0).setANumber(6);
+        aDices.get(1).setANumber(3);
+        aDices.get(2).setANumber(6);
+        aDices.get(3).setANumber(2);
+        aDices.get(4).setANumber(6);
+        aDices.get(5).setANumber(4);
+        assertTrue(diceComp.split(OneThreeFive, aCard));
+        assertEquals(1050, diceComp.getPoints());
+        aDices.get(0).setANumber(2);
+        aDices.get(1).setANumber(5);
+        aDices.get(2).setANumber(3);
+        assertTrue(diceComp.split(Two, aCard));
+        assertEquals(1100, diceComp.getPoints());
+        aDices.get(0).setANumber(1);
+        aDices.get(1).setANumber(5);
+        assertTrue(diceComp.isTutto());
+        assertEquals(1250, diceComp.getPoints());
+        diceComp.clear();
+        aDices.get(0).setANumber(6);
+        aDices.get(1).setANumber(3);
+        aDices.get(2).setANumber(6);
+        aDices.get(3).setANumber(2);
+        aDices.get(4).setANumber(2);
+        aDices.get(5).setANumber(4);
+        assertTrue(diceComp.isNull());
     }
 
 }
