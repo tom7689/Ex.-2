@@ -52,5 +52,73 @@ class BonusTest {
         assertTrue(diceComp.isNull());
     }
 
+    @Test
+    public void one1() {
+        diceComp.setPointsToZero();
+        List<Integer> i =  new ArrayList<>();
+        i.add(0);
+        diceComp.clear();
+        aDices.get(0).setANumber(1);
+        diceComp.split(i, new Bonus(100));
+        assertEquals(100, diceComp.getPoints());
+    }
 
+    @Test
+    public void tow1() {
+        diceComp.setPointsToZero();
+        List<Integer> i =  new ArrayList<>();
+        i.add(0);
+        i.add(2);
+        diceComp.clear();
+        aDices.get(0).setANumber(1);
+        aDices.get(2).setANumber(1);
+        diceComp.split(i, new Bonus(100));
+        assertEquals(200, diceComp.getPoints());
+    }
+
+    @Test
+    public void one1One5() {
+        diceComp.setPointsToZero();
+        List<Integer> i =  new ArrayList<>();
+        i.add(0);
+        i.add(2);
+        diceComp.clear();
+        aDices.get(0).setANumber(1);
+        aDices.get(2).setANumber(5);
+        diceComp.split(i, new Bonus(100));
+        assertEquals(150, diceComp.getPoints());
+    }
+
+    @Test
+    public void one5() {
+        diceComp.setPointsToZero();
+        List<Integer> i =  new ArrayList<>();
+        i.add(0);
+        diceComp.clear();
+        aDices.get(0).setANumber(5);
+        diceComp.split(i, new Bonus(100));
+        assertEquals(50, diceComp.getPoints());
+    }
+
+    @Test
+    public void drilling() {
+        diceComp.setPointsToZero();
+        List<Integer> i =  new ArrayList<>();
+        i.add(0);
+        i.add(1);
+        i.add(2);
+        diceComp.clear();
+        aDices.get(0).setANumber(1);
+        aDices.get(1).setANumber(1);
+        aDices.get(2).setANumber(1);
+        diceComp.split(i, new Bonus(100));
+        assertEquals(1000, diceComp.getPoints());
+    }
+
+    @Test
+    public void add100Bonus() {
+        diceComp.setPointsToZero();
+        diceComp.addBonusPoints(100);
+        assertEquals(100, diceComp.getPoints());
+    }
 }
