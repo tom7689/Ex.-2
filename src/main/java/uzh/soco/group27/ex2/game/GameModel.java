@@ -107,7 +107,7 @@ public class GameModel {
     private List<Player> sortPlayersScore() {
         List<Player> Ranking = new ArrayList<>(playerList);
         Ranking.sort(Player.scoreComparator);
-        System.out.println("Current ranking:");
+        System.out.println("Ranking before Plus/Minus:");
         for (Player player : Ranking) {
             System.out.println(player+": "+player.getScore());
         }
@@ -120,6 +120,10 @@ public class GameModel {
             if (player.getScore() == maxScore && !player.equals(aPlayer)) {
                 player.setScore(-1000);
             }
+        }
+        System.out.println("Current ranking:");
+        for (Player player : Ranking) {
+            System.out.println(player+": "+player.getScore());
         }
     }
 }

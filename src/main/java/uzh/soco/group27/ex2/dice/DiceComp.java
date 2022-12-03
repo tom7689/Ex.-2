@@ -56,9 +56,7 @@ public class DiceComp{
         for (Dice dice : pDices) {
             int aNumber = dice.getPoints() - 1;
             List<Dice> sameNumber = rolledDices.get(aNumber);
-            if (sameNumber.size() == 0){
-                sameNumber.add(dice);
-            } else if (sameNumber.size() == 2){
+            if (sameNumber.size() == 2){
                 sameNumber.add(dice);
                 drillingList.add(new Drilling(sameNumber, aNumber));
                 rolledDices.set(aNumber, new ArrayList<>());
@@ -90,12 +88,11 @@ public class DiceComp{
         if (pCardMode.getClass() == Fireworks.class) {
             testPoints(aDices);
             for (int index : pIndices) {
-                if (hasNoPoints(aDices.get(index))) {
-                    tempDices.clear();
-                    return false;
-                } else {
-                    tempDices.add(aDices.get(index));
-                }
+                tempDices.add(aDices.get(index));
+            }
+            if (drillingNotValid(tempDices)) {
+                tempDices.clear();
+                return false;
             }
             for (Dice dice : aDicesWithPoints) {
                 if (!tempDices.contains(dice)) {
@@ -104,18 +101,16 @@ public class DiceComp{
                     return false;
                 }
             }
-            if (!testPoints(tempDices)) {
+            if (testPoints(tempDices)) {
+                selectedDices.addAll(tempDices);
+                for (Dice dice : tempDices) {
+                    aDices.remove(dice);
+                }
+                aDicesWithPoints.clear();
                 tempDices.clear();
-                return false;
+                points += getResults();
+                return true;
             }
-            selectedDices.addAll(tempDices);
-            for (Dice dice : tempDices) {
-                aDices.remove(dice);
-            }
-            aDicesWithPoints.clear();
-            tempDices.clear();
-            points += getResults();
-            return true;
         }
         else if (pCardMode.getClass() == Straight.class) {
             for (int index : pIndices) {
@@ -134,47 +129,43 @@ public class DiceComp{
         }
         else if (pCardMode.getClass() == PlusMinus.class){
             for (int index : pIndices) {
-                if (hasNoPoints(aDices.get(index))) {
-                    tempDices.clear();
-                    return false;
-                } else {
-                    tempDices.add(aDices.get(index));
-                }
+                tempDices.add(aDices.get(index));
             }
-            if (!testPoints(tempDices)) {
+            if (drillingNotValid(tempDices)) {
                 tempDices.clear();
                 return false;
             }
-            selectedDices.addAll(tempDices);
-            for (Dice dice : tempDices) {
-                aDices.remove(dice);
+            if (testPoints(tempDices)) {
+                selectedDices.addAll(tempDices);
+                for (Dice dice : tempDices) {
+                    aDices.remove(dice);
+                }
+                aDicesWithPoints.clear();
+                tempDices.clear();
+                return true;
             }
-            aDicesWithPoints.clear();
-            tempDices.clear();
-            return true;
         }
         else {
             for (int index : pIndices) {
-                if (hasNoPoints(aDices.get(index))) {
-                    tempDices.clear();
-                    return false;
-                } else {
-                    tempDices.add(aDices.get(index));
-                }
+                tempDices.add(aDices.get(index));
             }
-            if (!testPoints(tempDices)) {
+            if (drillingNotValid(tempDices)) {
                 tempDices.clear();
                 return false;
             }
-            selectedDices.addAll(tempDices);
-            for (Dice dice : tempDices) {
-                aDices.remove(dice);
+            if (testPoints(tempDices)) {
+                selectedDices.addAll(tempDices);
+                for (Dice dice : tempDices) {
+                    aDices.remove(dice);
+                }
+                aDicesWithPoints.clear();
+                tempDices.clear();
+                points += getResults();
+                return true;
             }
-            aDicesWithPoints.clear();
-            tempDices.clear();
-            points += getResults();
-            return true;
         }
+        assert false;
+        return false;
     }
 
     public boolean isNull() {
@@ -194,6 +185,25 @@ public class DiceComp{
     private boolean hasNoPoints(Dice pDice) {
         testPoints(aDices);
         return !aDicesWithPoints.contains(pDice);
+    }
+    private boolean drillingNotValid(List<Dice> tempDices) {
+        List<List<Dice>> drillingControlList = new ArrayList<>();
+        for (int i = 0; i < 6; i++) {
+            drillingControlList.add(i, new ArrayList<>());
+        }
+        for (Dice dice : tempDices) {
+            if (dice.getPoints() - 1 != 0 && dice.getPoints() - 1 != 4) {
+                List<Dice> sameNumber = drillingControlList.get(dice.getPoints() - 1);
+                sameNumber.add(dice);
+            }
+        }
+        int[] ints = new int[]{1, 2, 3, 5};
+        for (int i : ints) {
+            if (drillingControlList.get(i).size() != 0 && drillingControlList.get(i).size() != 3) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public int getLength() {
