@@ -19,6 +19,7 @@ public class Fireworks implements CardMode{
                 System.out.println("Points so far: " + pDiceComp.getPoints());
                 pDiceComp.clear();
                 play(pDiceComp, pIn);
+                return;
             }
             pIn.selectDices(pDiceComp, this);
             System.out.println("Points so far: " + pDiceComp.getPoints());

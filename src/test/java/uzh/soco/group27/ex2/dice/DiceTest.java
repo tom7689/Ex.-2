@@ -8,11 +8,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DiceTest {
     DiceComp diceComp = Dice.getDices();
-    List<Dice> aDices = diceComp.getaDices();
-
 
     @Test
     public void hasSixDices() {
+        diceComp.clear();
         assertEquals(6, diceComp.getLength());
     }
 

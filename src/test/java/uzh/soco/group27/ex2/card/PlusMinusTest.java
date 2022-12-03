@@ -134,4 +134,29 @@ class PlusMinusTest {
         diceComp.setPlusMinusTutto();
         assertEquals(1000, diceComp.getPoints());
     }
+    @Test
+    public void DrillingPlus() {
+        diceComp.clear();
+        diceComp.setPointsToZero();
+        aDices.get(0).setANumber(2);
+        aDices.get(1).setANumber(2);
+        aDices.get(2).setANumber(2);
+        aDices.get(3).setANumber(5);
+        aDices.get(4).setANumber(2);
+        aDices.get(5).setANumber(2);
+        assertFalse(diceComp.split(OneTwoThreeFiveSix, aCard));
+        assertTrue(diceComp.split(OneThreeFive, aCard));
+        aDices.get(0).setANumber(5);
+        aDices.get(1).setANumber(2);
+        aDices.get(2).setANumber(5);
+        assertTrue(diceComp.split(One, aCard));
+        aDices.get(0).setANumber(2);
+        aDices.get(1).setANumber(5);
+        assertTrue(diceComp.split(Two, aCard));
+        aDices.get(0).setANumber(1);
+        assertTrue(diceComp.isTutto());
+        diceComp.addBonusPoints(1000);
+        diceComp.setPlusMinusTutto();
+        assertEquals(1000, diceComp.getPoints());
+    }
 }

@@ -12,6 +12,7 @@ public class Straight implements CardMode{
         while (true) {
             pDiceComp.roll();
             if (pDiceComp.isNoStraight()) {
+                pDiceComp.setPointsToZero();
                 System.out.println("No Straight possible");
                 return;
             }

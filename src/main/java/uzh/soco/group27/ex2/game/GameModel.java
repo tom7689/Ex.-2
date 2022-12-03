@@ -1,5 +1,6 @@
 package uzh.soco.group27.ex2.game;
 
+import uzh.soco.group27.ex2.card.Card;
 import uzh.soco.group27.ex2.card.CardMode;
 import uzh.soco.group27.ex2.card.Deck;
 import uzh.soco.group27.ex2.dice.Dice;
@@ -42,24 +43,24 @@ public class GameModel {
                 diceComp.clear();
                 diceComp.setPointsToZero();
                 if (in.displayScore(playerList)) {
-                    CardMode mode = deck.draw();
+                    CardMode mode = Card.get(1);
                     System.out.println("Card: "+mode);
                     mode.play(diceComp, in);
                     deck.push(mode);
                     while (mode.isTutto() && in.toContinue()) {
                         diceComp.clear();
                         mode.setTuttoBack();
-                        mode = deck.draw();
+                        mode = Card.get(1);
                         System.out.println("Card: " + mode);
                         mode.play(diceComp, in);
                         deck.push(mode);
                     }
                 }
+                player.setScore(diceComp.getPoints());
                 if (diceComp.plusMinusTutto()) {
                     diceComp.setPlusMinusTuttoBack();
                     plusMinusTutto(player);
                 }
-                player.setScore(diceComp.getPoints());
                 if (checkPlayersScore() || diceComp.isCloverleaf()) {
                     System.out.println("You won");
                     for (Player player1 : playerList) {
