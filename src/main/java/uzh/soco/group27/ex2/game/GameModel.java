@@ -43,14 +43,14 @@ public class GameModel {
                 diceComp.clear();
                 diceComp.setPointsToZero();
                 if (in.displayScore(playerList)) {
-                    CardMode mode = Card.get(1);
+                    CardMode mode = deck.draw();
                     System.out.println("Card: "+mode);
                     mode.play(diceComp, in);
                     deck.push(mode);
                     while (mode.isTutto() && in.toContinue()) {
                         diceComp.clear();
                         mode.setTuttoBack();
-                        mode = Card.get(1);
+                        mode = deck.draw();
                         System.out.println("Card: " + mode);
                         mode.play(diceComp, in);
                         deck.push(mode);
