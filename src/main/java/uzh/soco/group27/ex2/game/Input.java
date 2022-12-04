@@ -93,10 +93,10 @@ public class Input{
         System.out.println("Enter name of Player "+i+":");
         while (true) {
             String aLine = aInput.ask();
-            if (aLine.length() < 1) {
-                throw new IllegalArgumentException();
-            }
             try {
+                if (aLine.length() < 1) {
+                    throw new IllegalArgumentException();
+                }
                 return aLine;
             } catch (Exception ignored) {
             }
