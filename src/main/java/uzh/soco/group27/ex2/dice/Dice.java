@@ -16,25 +16,16 @@ public class Dice {
     public static DiceComp getDices() {
         return DICES;
     }
-    private int aNumber = 0;
+    private int aNumber;
 
     public void roll() {
         aNumber = new Random().nextInt(6) + 1;
-        getResults();
         System.out.print(aNumber + " ");
     }
     public int getPoints() {
         return aNumber;
     }
 
-    private void getResults() {
-        int points = 0;
-        if (aNumber == 1) {
-            points = 100;
-        } else if (aNumber == 5) {
-            points = 50;
-        }
-    }
     @Override
     public String toString() {
         return ""+aNumber;

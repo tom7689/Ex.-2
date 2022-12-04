@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Input {
+public class Input{
     private final Scanner aInput = new Scanner(System.in);
 
     public void selectDices(DiceComp pDiceComp, CardMode pCardMode) {
@@ -69,7 +69,7 @@ public class Input {
         }
     }
     public int getNumberOfPlayers() {
-        System.out.println("Enter amount of Players (2-4):");
+        System.out.println("Enter number of Players (2-4):");
         while (true) {
             String aLine = aInput.nextLine();
             try {

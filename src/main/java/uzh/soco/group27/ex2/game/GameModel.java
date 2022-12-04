@@ -43,24 +43,28 @@ public class GameModel {
                 diceComp.clear();
                 diceComp.setPointsToZero();
                 if (in.displayScore(playerList)) {
-                    CardMode mode = deck.draw();
+                    CardMode mode = Card.get(21);
                     System.out.println("Card: "+mode);
                     mode.play(diceComp, in);
                     deck.push(mode);
-                    while (mode.isTutto() && in.toContinue()) {
-                        diceComp.clear();
-                        mode.setTuttoBack();
-                        mode = deck.draw();
-                        System.out.println("Card: " + mode);
-                        mode.play(diceComp, in);
-                        deck.push(mode);
+                    while (mode.isTutto()) {
+                        if (in.toContinue()) {
+                            diceComp.clear();
+                            mode.setTuttoBack();
+                            mode = Card.get(1);
+                            System.out.println("Card: " + mode);
+                            mode.play(diceComp, in);
+                            deck.push(mode);
+                        } else {
+                            mode.setTuttoBack();
+                        }
                     }
                 }
-                player.setScore(diceComp.getPoints());
                 if (diceComp.plusMinusTutto()) {
                     diceComp.setPlusMinusTuttoBack();
                     plusMinusTutto(player);
                 }
+                player.setScore(diceComp.getPoints());
                 if (checkPlayersScore() || diceComp.isCloverleaf()) {
                     System.out.println("You won");
                     for (Player player1 : playerList) {
@@ -108,9 +112,9 @@ public class GameModel {
     private List<Player> sortPlayersScore() {
         List<Player> Ranking = new ArrayList<>(playerList);
         Ranking.sort(Player.scoreComparator);
-        System.out.println("Ranking before Plus/Minus:");
+        System.out.println("Current ranking before Plus/Minus:");
         for (Player player : Ranking) {
-            System.out.println(player+": "+player.getScore());
+            System.out.println(player + ": " + player.getScore());
         }
         return Ranking;
     }
@@ -121,10 +125,6 @@ public class GameModel {
             if (player.getScore() == maxScore && !player.equals(aPlayer)) {
                 player.setScore(-1000);
             }
-        }
-        System.out.println("Current ranking:");
-        for (Player player : Ranking) {
-            System.out.println(player+": "+player.getScore());
         }
     }
 }
