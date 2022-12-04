@@ -68,10 +68,11 @@ class DrillingTest {
 
 
         }
-        @Test
-        public void isDrillingOfOne() {
-            //assertEquals(Drilling(TripletsofOne).getPoints, 1000);
-        }
+    @Test
+    public void isDrillingOfOne() {
+    Drilling drilling1 = new Drilling(TripletsofOne, 0);
+    assertEquals(1000, drilling1.getPoints());
+    }
 
     @Test
     public void isDrillingOfTwo() {
