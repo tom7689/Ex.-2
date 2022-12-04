@@ -9,13 +9,17 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Input{
-    private final Scanner aInput = new Scanner(System.in);
+    private final InputAsker aInput;
+
+    public Input (InputAsker pInput) {
+        aInput = pInput;
+    }
 
     public void selectDices(DiceComp pDiceComp, CardMode pCardMode) {
         List<Integer> indices = new ArrayList<>(6);
         System.out.println("Enter dices (separated by comma) to select: ");
         while (true) {
-            String aLine = aInput.nextLine();
+            String aLine = aInput.ask();
             try {
                 assert aLine.length() <= pDiceComp.getLength()*2;
                 while (!aLine.isEmpty()) {
@@ -60,7 +64,7 @@ public class Input{
     public boolean toContinue() {
         while (true) {
             System.out.println("Press (R)oll or (E)nd your turn");
-            String aLine = aInput.nextLine();
+            String aLine = aInput.ask();
             if (aLine.equals("R")) {
                 return true;
             } else if (aLine.equals("E")) {
@@ -71,7 +75,7 @@ public class Input{
     public int getNumberOfPlayers() {
         System.out.println("Enter number of Players (2-4):");
         while (true) {
-            String aLine = aInput.nextLine();
+            String aLine = aInput.ask();
             try {
                 if (aLine.length() == 1) {
                     int q = aLine.charAt(0)-48;
@@ -88,7 +92,7 @@ public class Input{
     public String getPlayerName(int i) {
         System.out.println("Enter name of Player "+i+":");
         while (true) {
-            String aLine = aInput.nextLine();
+            String aLine = aInput.ask();
             if (aLine.length() < 1) {
                 throw new IllegalArgumentException();
             }
@@ -101,7 +105,7 @@ public class Input{
     public int scoreToReach() {
         System.out.println("Enter Score to reach (1000-20000):");
         while (true) {
-            String aLine = aInput.nextLine();
+            String aLine = aInput.ask();
             try {
                 int score = Integer.parseInt(aLine);
                 if (score >= 1000 && score <= 20000) {
@@ -117,7 +121,7 @@ public class Input{
         System.out.println("Press (R)oll or (D)isplay current scores");
         while (true) {
 
-            String aLine = aInput.nextLine();
+            String aLine = aInput.ask();
             if (aLine.equals("R")) {
                 return true;
             } else if (aLine.equals("D")) {

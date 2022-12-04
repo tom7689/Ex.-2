@@ -23,7 +23,7 @@ public class GameModel {
     public GameModel() {
         deck = new Deck();
         diceComp = Dice.getDices();
-        in = new Input();
+        in = new Input(new InputAsker(System.in));
         numberOfPlayers = in.getNumberOfPlayers();
         System.out.println("Number of Players: " + numberOfPlayers);
         addPlayers();

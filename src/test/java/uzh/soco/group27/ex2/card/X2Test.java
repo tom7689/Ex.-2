@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import uzh.soco.group27.ex2.dice.Dice;
 import uzh.soco.group27.ex2.dice.DiceComp;
 import uzh.soco.group27.ex2.game.Input;
+import uzh.soco.group27.ex2.game.InputAsker;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -27,7 +28,7 @@ class X2Test {
     List<Integer> Two = new ArrayList<>(6);
     List<Integer> Three = new ArrayList<>(6);
     List<Dice> aDices = diceComp.getaDices();
-    Input in = new Input();
+    Input in = new Input(new InputAsker(System.in));
     X2Test() {
         setup();
     }
