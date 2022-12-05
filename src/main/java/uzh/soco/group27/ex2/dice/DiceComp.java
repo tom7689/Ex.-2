@@ -30,6 +30,7 @@ public class DiceComp{
         drillingList = new ArrayList<>(2);
 
     }
+    // rolls all the Dices in the List aDices
     public void roll() {
         for (Dice dice : aDices) {
             dice.roll();
@@ -37,6 +38,7 @@ public class DiceComp{
         testPoints(aDices);
         System.out.print("\n");
     }
+    //loops over the drillingList and adds the points in addition to the Dices of value 1 and 5
     private int getResults() {
         int aPoints = 0;
         for (Drilling drilling : drillingList) {
@@ -46,6 +48,12 @@ public class DiceComp{
         aPoints += rolledDices.get(4).size() * 50;
         return aPoints;
     }
+    /**
+     * @pre Dices must have been rolled
+     * Method checks the dices Value and assigns them to the DrillingList
+     * if a drilling is possible or not.
+     * @return true if any points can be made
+     */
 
     private boolean testPoints(List<Dice> pDices) {
         rolledDices.clear();
@@ -67,7 +75,10 @@ public class DiceComp{
         addDicesWithPoints();
         return getResults() > 0;
     }
-
+    /**
+     * adds all drillings and dices of Value 1 and 5 to the
+     * aDicesWithPoints List.
+     */
     private void addDicesWithPoints() {
         aDicesWithPoints.clear();
         aDicesWithPoints.addAll(rolledDices.get(0));
@@ -84,6 +95,13 @@ public class DiceComp{
         aDices.add(pDice);
     }
 
+    /**
+     * determins if a slpit is possible. checks if any Dices can be chosen.
+     * It does so by checking which Cardmode is set and adapting the
+     * choosing rules according to each Cardmode.
+     * If a split is possible, it returns the value true, if not false.
+     * @return true if a split is possible
+     */
     public boolean split(List<Integer> pIndices, CardMode pCardMode) {
         if (pCardMode.getClass() == Fireworks.class) {
             testPoints(aDices);
@@ -173,12 +191,18 @@ public class DiceComp{
         assert false;
         return false;
     }
-
+    /**
+     *Checks if the Dicecomposition is a Null
+     */
     public boolean isNull() {
         testPoints(aDices);
         return !testPoints(aDices);
 
     }
+    /**
+     * checks if a Tutto has been achieved
+     * @return true if all Dices in aDices have Points
+     */
     public boolean isTutto() {
         for (Dice aDice : aDices) {
             if (hasNoPoints(aDice)) {
@@ -188,10 +212,14 @@ public class DiceComp{
         points += getResults();
         return true;
     }
+    /**checks if the List of Dice contain any Dices wich merit points
+     */
     private boolean hasNoPoints(Dice pDice) {
         testPoints(aDices);
         return !aDicesWithPoints.contains(pDice);
     }
+    /**Checks if Triplets are not achievable with the rolled Dices
+     */
     private boolean drillingNotValid(List<Dice> tempDices) {
         List<List<Dice>> drillingControlList = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
@@ -211,11 +239,13 @@ public class DiceComp{
         }
         return false;
     }
-
+    /** returns the size of aDices
+     */
     public int getLength() {
         return aDices.size();
     }
-
+    /**returns aDices
+     */
     public List<Dice> getaDices() {
         return aDices;
     }
@@ -269,20 +299,30 @@ public class DiceComp{
     public void addBonusPoints(int bonus) {
         this.points += bonus;
     }
+    /** sets the boolean value of plusMinusTutto to true
+     */
     public void setPlusMinusTutto() {
         plusMinusTutto = true;
         points -= getResults();
     }
+    
+    /**sets the booleanvalue of plusMinusTutto to false
+     */
     public void setPlusMinusTuttoBack() {
         this.plusMinusTutto = false;
     }
+    /**() returns the boolean value of plusMinusTutto
+     */
     public boolean plusMinusTutto() {
         return plusMinusTutto;
     }
-
+    /**() sets the booleanvalue of cloverleaf to true
+     */
     public void setCloverleaf() {
         cloverleaf = true;
     }
+    /** returns the boolean value of cloverleaf
+     */
     public boolean isCloverleaf() {
         return cloverleaf;
     }
