@@ -1,5 +1,6 @@
 package uzh.soco.group27.ex2.game;
 
+import uzh.soco.group27.ex2.card.Card;
 import uzh.soco.group27.ex2.card.CardMode;
 import uzh.soco.group27.ex2.card.Deck;
 import uzh.soco.group27.ex2.dice.Dice;
@@ -42,7 +43,7 @@ public class GameModel {
                 diceComp.clear();
                 diceComp.setPointsToZero();
                 if (in.displayScore(playerList)) {
-                    CardMode mode = deck.draw();
+                    CardMode mode = Card.get(1);
                     System.out.println("Card: "+mode);
                     mode.play(diceComp, in);
                     deck.push(mode);

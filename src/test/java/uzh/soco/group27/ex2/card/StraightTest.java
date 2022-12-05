@@ -5,6 +5,7 @@ import uzh.soco.group27.ex2.dice.Dice;
 import uzh.soco.group27.ex2.dice.DiceComp;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -155,5 +156,46 @@ class StraightTest {
         aDices.get(0).setANumber(3);
         diceComp.split(One, aCard);
         assertTrue(diceComp.isStraight());
+    }
+    @Test
+    public void FalseSplit() {
+        diceComp.clear();
+        aDices.get(0).setANumber(2);
+        aDices.get(1).setANumber(2);
+        aDices.get(2).setANumber(6);
+        aDices.get(3).setANumber(6);
+        aDices.get(4).setANumber(5);
+        aDices.get(5).setANumber(2);
+        assertFalse(diceComp.split(OneTwoThreeFiveSix, aCard));
+    }
+    @Test
+    public void PlaceAlreadyChosen() {
+        diceComp.clear();
+        aDices.get(0).setANumber(2);
+        aDices.get(1).setANumber(1);
+        aDices.get(2).setANumber(6);
+        aDices.get(3).setANumber(6);
+        aDices.get(4).setANumber(5);
+        aDices.get(5).setANumber(4);
+        diceComp.split(One, aCard);
+        aDices.get(0).setANumber(2);
+        aDices.get(1).setANumber(1);
+        aDices.get(2).setANumber(6);
+        aDices.get(3).setANumber(6);
+        aDices.get(4).setANumber(5);
+        assertFalse(diceComp.split(One, aCard));
+    }
+    @Test
+    public void printStraightList() {
+        diceComp.clear();
+        aDices.get(0).setANumber(2);
+        aDices.get(1).setANumber(2);
+        aDices.get(2).setANumber(6);
+        aDices.get(3).setANumber(6);
+        aDices.get(4).setANumber(5);
+        aDices.get(5).setANumber(1);
+        assertTrue(diceComp.split(TwoFourSix, aCard));
+        List<Dice> straightList = diceComp.getStraightList();
+        assertEquals(6, straightList.size());
     }
 }

@@ -159,4 +159,10 @@ class PlusMinusTest {
         diceComp.setPlusMinusTutto();
         assertEquals(1000, diceComp.getPoints());
     }
+    @Test
+    public void PlusMinusTuttoBack() {
+        diceComp.clear();
+        diceComp.setPlusMinusTuttoBack();
+        assertFalse(diceComp.plusMinusTutto());
+    }
 }

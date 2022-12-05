@@ -14,5 +14,10 @@ class DiceTest {
         diceComp.clear();
         assertEquals(6, diceComp.getLength());
     }
-
+    @Test
+    public void checkNumber() {
+        List<Dice> dices = diceComp.getaDices();
+        dices.get(0).setANumber(1);
+        assertEquals(1, dices.get(0).getPoints());
+    }
 }

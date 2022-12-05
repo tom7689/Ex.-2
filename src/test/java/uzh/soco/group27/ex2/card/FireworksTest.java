@@ -91,6 +91,7 @@ class FireworksTest {
     @Test
     public void Tutto1() {
         diceComp.clear();
+        diceComp.setPointsToZero();
         aDices.get(0).setANumber(1);
         aDices.get(1).setANumber(5);
         aDices.get(2).setANumber(2);

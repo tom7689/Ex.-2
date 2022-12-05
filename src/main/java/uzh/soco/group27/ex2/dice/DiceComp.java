@@ -101,19 +101,24 @@ public class DiceComp{
                     return false;
                 }
             }
-            if (testPoints(tempDices)) {
-                selectedDices.addAll(tempDices);
-                for (Dice dice : tempDices) {
-                    aDices.remove(dice);
-                }
-                aDicesWithPoints.clear();
-                tempDices.clear();
-                points += getResults();
-                return true;
+            testPoints(tempDices);
+            selectedDices.addAll(tempDices);
+            for (Dice dice : tempDices) {
+                aDices.remove(dice);
             }
+            aDicesWithPoints.clear();
+            tempDices.clear();
+            points += getResults();
+            return true;
         }
         else if (pCardMode.getClass() == Straight.class) {
             for (int index : pIndices) {
+                for (Dice dice : tempDices) {
+                    if (aDices.get(index).getPoints() == dice.getPoints()) {
+                        tempDices.clear();
+                        return false;
+                    }
+                }
                 if (straightList.get(aDices.get(index).getPoints() - 1) != null) {
                     tempDices.clear();
                     return false;
@@ -125,6 +130,7 @@ public class DiceComp{
                 straightList.set(dice.getPoints() - 1, dice);
                 aDices.remove(dice);
             }
+            tempDices.clear();
             return true;
         }
         else if (pCardMode.getClass() == PlusMinus.class){
