@@ -1,6 +1,5 @@
 package uzh.soco.group27.ex2.game;
 
-import uzh.soco.group27.ex2.card.Card;
 import uzh.soco.group27.ex2.card.CardMode;
 import uzh.soco.group27.ex2.card.Deck;
 import uzh.soco.group27.ex2.dice.Dice;

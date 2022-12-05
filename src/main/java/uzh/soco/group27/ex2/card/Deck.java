@@ -56,11 +56,7 @@ public class Deck
 		aCount++;
 		return aCards.pop();
 	}
-	/**
-	public void print() {
-		aCards.print();
-	}/**
-	
+
 	/**
 	 * @return True iff there are no cards in the deck.
 	 */

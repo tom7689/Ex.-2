@@ -1,7 +1,6 @@
 package uzh.soco.group27.ex2.card;
 
 import org.junit.jupiter.api.Test;
-import uzh.soco.group27.ex2.card.CardStack;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;

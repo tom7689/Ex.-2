@@ -6,7 +6,6 @@ import uzh.soco.group27.ex2.player.Player;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Input{
     private final InputAsker aInput;

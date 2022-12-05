@@ -1,13 +1,7 @@
 package uzh.soco.group27.ex2.dice;
 
 import org.junit.jupiter.api.Test;
-import uzh.soco.group27.ex2.card.Bonus;
-import uzh.soco.group27.ex2.card.Card;
-import uzh.soco.group27.ex2.card.CardMode;
-import uzh.soco.group27.ex2.dice.Dice;
-import uzh.soco.group27.ex2.dice.DiceComp;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;

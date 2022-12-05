@@ -1,8 +1,6 @@
 package uzh.soco.group27.ex2.card;
 
 import org.junit.jupiter.api.Test;
-import uzh.soco.group27.ex2.card.Card;
-import uzh.soco.group27.ex2.card.Cloverleaf;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
