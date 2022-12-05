@@ -10,6 +10,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CardStackTest {
     CardStack TestStack = new CardStack();
+    @Test
+    public void PopEmptyTest() {
+        assertThrows(AssertionError.class,()->TestStack.pop());
+    }
+    @Test
+    public void PushAssertTest(){
+        CardMode TestCard = null;
+        assertThrows(AssertionError.class,()->TestStack.push(TestCard));
+
+    }
 
     @Test
     public void IsEmptyTest(){
