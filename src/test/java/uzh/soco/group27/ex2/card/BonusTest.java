@@ -3,7 +3,10 @@ package uzh.soco.group27.ex2.card;
 import org.junit.jupiter.api.Test;
 import uzh.soco.group27.ex2.dice.Dice;
 import uzh.soco.group27.ex2.dice.DiceComp;
+import uzh.soco.group27.ex2.game.Input;
+import uzh.soco.group27.ex2.game.InputAsker;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -120,5 +123,18 @@ class BonusTest {
         diceComp.setPointsToZero();
         diceComp.addBonusPoints(100);
         assertEquals(100, diceComp.getPoints());
+    }
+
+    @Test
+    public void playerDoesNotContinue() {
+        OutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+        Bonus bonus = new Bonus(100);
+        InputStream in = new ByteArrayInputStream("E".getBytes());
+        Input input = new Input(new InputAsker(in));
+        diceComp.setPointsToZero();
+        bonus.play(diceComp, input);
+        assertEquals("Press (R)oll or (E)nd your turn\r\n" +
+                "Points saved: 0\r\n", out.toString());
     }
 }
