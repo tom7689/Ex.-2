@@ -43,7 +43,7 @@ public class GameModel {
                 diceComp.clear();
                 diceComp.setPointsToZero();
                 if (in.displayScore(playerList)) {
-                    CardMode mode = Card.get(1);
+                    CardMode mode = deck.draw();
                     System.out.println("Card: "+mode);
                     mode.play(diceComp, in);
                     deck.push(mode);
