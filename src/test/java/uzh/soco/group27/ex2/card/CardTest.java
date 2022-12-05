@@ -5,8 +5,16 @@ import uzh.soco.group27.ex2.card.Card;
 import uzh.soco.group27.ex2.card.Cloverleaf;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class CardTest {
+    @Test
+    public void getCardAssertions(){
+        assertThrows(AssertionError.class,()-> Card.get(-1).getClass());
+        assertThrows(AssertionError.class,()-> Card.get(100).getClass());
+
+    }
+
 
     @Test
     public void isCloverleaf() {
