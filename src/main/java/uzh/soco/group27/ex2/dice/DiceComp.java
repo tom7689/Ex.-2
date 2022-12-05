@@ -305,7 +305,7 @@ public class DiceComp{
         plusMinusTutto = true;
         points -= getResults();
     }
-    
+
     /**sets the booleanvalue of plusMinusTutto to false
      */
     public void setPlusMinusTuttoBack() {
